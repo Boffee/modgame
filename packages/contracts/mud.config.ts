@@ -5,6 +5,7 @@ export default mudConfig({
     Id: "uint256",
     Counter: "uint256",
     Creature: "bytes32",
+    CreatureLineage: "bytes32",
     CreatureStats: {
       schema: {
         lifespan: "uint40",
@@ -13,6 +14,12 @@ export default mudConfig({
         attackDistance: "uint8",
         attackCooldown: "uint40",
         cooldownReserveCapacity: "uint40",
+      },
+    },
+    Mutation: {
+      schema: {
+        creature: "bytes32",
+        endsAt: "uint40",
       },
     },
     Diet: {
@@ -44,11 +51,6 @@ export default mudConfig({
       schema: {
         x: "int128",
         y: "int128",
-      },
-    },
-    Mutation: {
-      schema: {
-        parent: "bytes32",
       },
     },
     Balance: {

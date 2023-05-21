@@ -50,6 +50,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    CreatureLineage: (() => {
+      const tableId = new TableId("", "CreatureLineage");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     CreatureStats: (() => {
       const tableId = new TableId("", "CreatureStats");
       return defineComponent(
@@ -61,6 +76,22 @@ export function defineContractComponents(world: World) {
           attackDistance: RecsType.Number,
           attackCooldown: RecsType.Number,
           cooldownReserveCapacity: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Mutation: (() => {
+      const tableId = new TableId("", "Mutation");
+      return defineComponent(
+        world,
+        {
+          creature: RecsType.String,
+          endsAt: RecsType.Number,
         },
         {
           metadata: {
@@ -134,12 +165,12 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    Mutation: (() => {
-      const tableId = new TableId("", "Mutation");
+    Balance: (() => {
+      const tableId = new TableId("", "Balance");
       return defineComponent(
         world,
         {
-          parent: RecsType.String,
+          value: RecsType.BigInt,
         },
         {
           metadata: {
@@ -149,8 +180,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    Balance: (() => {
-      const tableId = new TableId("", "Balance");
+    TotalSupply: (() => {
+      const tableId = new TableId("", "TotalSupply");
       return defineComponent(
         world,
         {
