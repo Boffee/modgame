@@ -50,6 +50,26 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    CreatureStats: (() => {
+      const tableId = new TableId("", "CreatureStats");
+      return defineComponent(
+        world,
+        {
+          lifespan: RecsType.Number,
+          moveDistance: RecsType.Number,
+          moveCooldown: RecsType.Number,
+          attackDistance: RecsType.Number,
+          attackCooldown: RecsType.Number,
+          cooldownReserveCapacity: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Diet: (() => {
       const tableId = new TableId("", "Diet");
       return defineComponent(
@@ -166,6 +186,22 @@ export function defineContractComponents(world: World) {
         {
           createdAt: RecsType.Number,
           updatedAt: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Cooldown: (() => {
+      const tableId = new TableId("", "Cooldown");
+      return defineComponent(
+        world,
+        {
+          readyAt: RecsType.Number,
+          reserve: RecsType.Number,
         },
         {
           metadata: {

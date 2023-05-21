@@ -11,6 +11,16 @@ export default mudConfig({
     Creature: {
       schema: "bytes32",
     },
+    CreatureStats: {
+      schema: {
+        lifespan: "uint40",
+        moveDistance: "uint8",
+        moveCooldown: "uint40",
+        attackDistance: "uint8",
+        attackCooldown: "uint40",
+        cooldownReserveCapacity: "uint40",
+      },
+    },
     Diet: {
       keySchema: {
         creature: "bytes32",
@@ -38,8 +48,8 @@ export default mudConfig({
     },
     Position: {
       schema: {
-        x: "uint128",
-        y: "uint128",
+        x: "int128",
+        y: "int128",
       },
     },
     Mutation: {
@@ -61,6 +71,12 @@ export default mudConfig({
       schema: {
         createdAt: "uint40",
         updatedAt: "uint40",
+      },
+    },
+    Cooldown: {
+      schema: {
+        readyAt: "uint40",
+        reserve: "uint40",
       },
     },
   },
