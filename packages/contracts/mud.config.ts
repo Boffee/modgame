@@ -4,9 +4,9 @@ export default mudConfig({
   tables: {
     Id: "uint256",
     Counter: "uint256",
-    Creature: "bytes32",
-    CreatureLineage: "bytes32",
-    CreatureStats: {
+    CreatureType: "bytes32",
+    CreatureTypeLineage: "bytes32",
+    CreatureTypeStats: {
       schema: {
         lifespan: "uint40",
         moveDistance: "uint8",
@@ -16,34 +16,16 @@ export default mudConfig({
         cooldownReserveCapacity: "uint40",
       },
     },
-    Mutation: {
+    CreatureMutation: {
       schema: {
         creature: "bytes32",
         endsAt: "uint40",
       },
     },
-    Diet: {
-      keySchema: {
-        creature: "bytes32",
-        resource: "bytes32",
-      },
-      schema: "bool",
-    },
-    Drop: {
-      keySchema: {
-        creature: "bytes32",
-      },
-      schema: {
-        primaryResource: "bytes32",
-        secondaryResource: "bytes32",
-        primaryResourceQuantity: "uint128",
-        secondaryResourceQuantity: "uint128",
-      },
-    },
     Predation: {
       keySchema: {
-        predator: "bytes32",
-        prey: "bytes32",
+        predatorType: "bytes32",
+        preyType: "bytes32",
       },
       schema: "bool",
     },

@@ -2,9 +2,9 @@
 pragma solidity >=0.8.0;
 
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {CreatureStats} from "../codegen/tables/CreatureStats.sol";
+import {CreatureTypeStats} from "../codegen/tables/CreatureTypeStats.sol";
 import {Cooldown, CooldownData} from "../codegen/tables/Cooldown.sol";
-import {CreatureLib} from "../libraries/CreatureLib.sol";
+import {CreatureTypeLib} from "../libraries/CreatureTypeLib.sol";
 import {AuthedSystem} from "./AuthedSystem.sol";
 
 /**
@@ -44,7 +44,9 @@ contract AuthedCooldownSystem is AuthedSystem {
         readyAt: uint40(block.timestamp + duration),
         reserve: uint40(
           Math.min(
-            CreatureStats.getCooldownReserveCapacity(CreatureLib.get(entity)),
+            CreatureTypeStats.getCooldownReserveCapacity(
+              CreatureTypeLib.get(entity)
+            ),
             block.timestamp - cooldown.readyAt - cooldown.reserve
           )
           )

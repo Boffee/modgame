@@ -67,39 +67,39 @@ library Predation {
   }
 
   /** Get value */
-  function get(bytes32 predator, bytes32 prey) internal view returns (bool value) {
+  function get(bytes32 predatorType, bytes32 preyType) internal view returns (bool value) {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 0);
     return (_toBool(uint8(Bytes.slice1(_blob, 0))));
   }
 
   /** Get value (using the specified store) */
-  function get(IStore _store, bytes32 predator, bytes32 prey) internal view returns (bool value) {
+  function get(IStore _store, bytes32 predatorType, bytes32 preyType) internal view returns (bool value) {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 0);
     return (_toBool(uint8(Bytes.slice1(_blob, 0))));
   }
 
   /** Set value */
-  function set(bytes32 predator, bytes32 prey, bool value) internal {
+  function set(bytes32 predatorType, bytes32 preyType, bool value) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
   }
 
   /** Set value (using the specified store) */
-  function set(IStore _store, bytes32 predator, bytes32 prey, bool value) internal {
+  function set(IStore _store, bytes32 predatorType, bytes32 preyType, bool value) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
   }
@@ -110,26 +110,26 @@ library Predation {
   }
 
   /** Encode keys as a bytes32 array using this table's schema */
-  function encodeKeyTuple(bytes32 predator, bytes32 prey) internal pure returns (bytes32[] memory _keyTuple) {
+  function encodeKeyTuple(bytes32 predatorType, bytes32 preyType) internal pure returns (bytes32[] memory _keyTuple) {
     _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
   }
 
   /* Delete all data for given keys */
-  function deleteRecord(bytes32 predator, bytes32 prey) internal {
+  function deleteRecord(bytes32 predatorType, bytes32 preyType) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     StoreSwitch.deleteRecord(_tableId, _keyTuple);
   }
 
   /* Delete all data for given keys (using the specified store) */
-  function deleteRecord(IStore _store, bytes32 predator, bytes32 prey) internal {
+  function deleteRecord(IStore _store, bytes32 predatorType, bytes32 preyType) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
-    _keyTuple[0] = bytes32((predator));
-    _keyTuple[1] = bytes32((prey));
+    _keyTuple[0] = bytes32((predatorType));
+    _keyTuple[1] = bytes32((preyType));
 
     _store.deleteRecord(_tableId, _keyTuple);
   }

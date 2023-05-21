@@ -17,10 +17,10 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("CreatureStats")));
-bytes32 constant CreatureStatsTableId = _tableId;
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("CreatureTypeStat")));
+bytes32 constant CreatureTypeStatsTableId = _tableId;
 
-struct CreatureStatsData {
+struct CreatureTypeStatsData {
   uint40 lifespan;
   uint8 moveDistance;
   uint40 moveCooldown;
@@ -29,7 +29,7 @@ struct CreatureStatsData {
   uint40 cooldownReserveCapacity;
 }
 
-library CreatureStats {
+library CreatureTypeStats {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
     SchemaType[] memory _schema = new SchemaType[](6);
@@ -59,7 +59,7 @@ library CreatureStats {
     _fieldNames[3] = "attackDistance";
     _fieldNames[4] = "attackCooldown";
     _fieldNames[5] = "cooldownReserveCapacity";
-    return ("CreatureStats", _fieldNames);
+    return ("CreatureTypeStats", _fieldNames);
   }
 
   /** Register the table's schema */
@@ -292,7 +292,7 @@ library CreatureStats {
   }
 
   /** Get the full data */
-  function get(bytes32 key) internal view returns (CreatureStatsData memory _table) {
+  function get(bytes32 key) internal view returns (CreatureTypeStatsData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -301,7 +301,7 @@ library CreatureStats {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (CreatureStatsData memory _table) {
+  function get(IStore _store, bytes32 key) internal view returns (CreatureTypeStatsData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -361,7 +361,7 @@ library CreatureStats {
   }
 
   /** Set the full data using the data struct */
-  function set(bytes32 key, CreatureStatsData memory _table) internal {
+  function set(bytes32 key, CreatureTypeStatsData memory _table) internal {
     set(
       key,
       _table.lifespan,
@@ -374,7 +374,7 @@ library CreatureStats {
   }
 
   /** Set the full data using the data struct (using the specified store) */
-  function set(IStore _store, bytes32 key, CreatureStatsData memory _table) internal {
+  function set(IStore _store, bytes32 key, CreatureTypeStatsData memory _table) internal {
     set(
       _store,
       key,
@@ -388,7 +388,7 @@ library CreatureStats {
   }
 
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal pure returns (CreatureStatsData memory _table) {
+  function decode(bytes memory _blob) internal pure returns (CreatureTypeStatsData memory _table) {
     _table.lifespan = (uint40(Bytes.slice5(_blob, 0)));
 
     _table.moveDistance = (uint8(Bytes.slice1(_blob, 5)));

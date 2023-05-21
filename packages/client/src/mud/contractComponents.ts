@@ -35,8 +35,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    Creature: (() => {
-      const tableId = new TableId("", "Creature");
+    CreatureType: (() => {
+      const tableId = new TableId("", "CreatureType");
       return defineComponent(
         world,
         {
@@ -50,8 +50,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureLineage: (() => {
-      const tableId = new TableId("", "CreatureLineage");
+    CreatureTypeLineage: (() => {
+      const tableId = new TableId("", "CreatureTypeLine");
       return defineComponent(
         world,
         {
@@ -65,8 +65,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureStats: (() => {
-      const tableId = new TableId("", "CreatureStats");
+    CreatureTypeStats: (() => {
+      const tableId = new TableId("", "CreatureTypeStat");
       return defineComponent(
         world,
         {
@@ -85,46 +85,13 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    Mutation: (() => {
-      const tableId = new TableId("", "Mutation");
+    CreatureMutation: (() => {
+      const tableId = new TableId("", "CreatureMutation");
       return defineComponent(
         world,
         {
           creature: RecsType.String,
           endsAt: RecsType.Number,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Diet: (() => {
-      const tableId = new TableId("", "Diet");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.Boolean,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Drop: (() => {
-      const tableId = new TableId("", "Drop");
-      return defineComponent(
-        world,
-        {
-          primaryResource: RecsType.String,
-          secondaryResource: RecsType.String,
-          primaryResourceQuantity: RecsType.BigInt,
-          secondaryResourceQuantity: RecsType.BigInt,
         },
         {
           metadata: {

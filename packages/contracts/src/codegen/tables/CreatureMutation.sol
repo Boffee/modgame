@@ -17,15 +17,15 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Mutation")));
-bytes32 constant MutationTableId = _tableId;
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("CreatureMutation")));
+bytes32 constant CreatureMutationTableId = _tableId;
 
-struct MutationData {
+struct CreatureMutationData {
   bytes32 creature;
   uint40 endsAt;
 }
 
-library Mutation {
+library CreatureMutation {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
     SchemaType[] memory _schema = new SchemaType[](2);
@@ -47,7 +47,7 @@ library Mutation {
     string[] memory _fieldNames = new string[](2);
     _fieldNames[0] = "creature";
     _fieldNames[1] = "endsAt";
-    return ("Mutation", _fieldNames);
+    return ("CreatureMutation", _fieldNames);
   }
 
   /** Register the table's schema */
@@ -141,7 +141,7 @@ library Mutation {
   }
 
   /** Get the full data */
-  function get(bytes32 key) internal view returns (MutationData memory _table) {
+  function get(bytes32 key) internal view returns (CreatureMutationData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -150,7 +150,7 @@ library Mutation {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (MutationData memory _table) {
+  function get(IStore _store, bytes32 key) internal view returns (CreatureMutationData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -179,17 +179,17 @@ library Mutation {
   }
 
   /** Set the full data using the data struct */
-  function set(bytes32 key, MutationData memory _table) internal {
+  function set(bytes32 key, CreatureMutationData memory _table) internal {
     set(key, _table.creature, _table.endsAt);
   }
 
   /** Set the full data using the data struct (using the specified store) */
-  function set(IStore _store, bytes32 key, MutationData memory _table) internal {
+  function set(IStore _store, bytes32 key, CreatureMutationData memory _table) internal {
     set(_store, key, _table.creature, _table.endsAt);
   }
 
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal pure returns (MutationData memory _table) {
+  function decode(bytes memory _blob) internal pure returns (CreatureMutationData memory _table) {
     _table.creature = (Bytes.slice32(_blob, 0));
 
     _table.endsAt = (uint40(Bytes.slice5(_blob, 32)));
