@@ -35,8 +35,8 @@ export default mudConfig({
     },
     Predation: {
       keySchema: {
-        predatorType: "bytes32",
-        preyType: "bytes32",
+        predator: "bytes32",
+        prey: "bytes32",
       },
       schema: "bool",
     },
@@ -58,6 +58,7 @@ export default mudConfig({
       },
       schema: "uint256",
     },
+    TotalSupply: "uint256",
     Owner: "address",
     Metdata: {
       schema: {

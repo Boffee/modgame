@@ -13,6 +13,7 @@ import { Predation, PredationTableId } from "./tables/Predation.sol";
 import { Position, PositionData, PositionTableId } from "./tables/Position.sol";
 import { Mutation, MutationTableId } from "./tables/Mutation.sol";
 import { Balance, BalanceTableId } from "./tables/Balance.sol";
+import { TotalSupply, TotalSupplyTableId } from "./tables/TotalSupply.sol";
 import { Owner, OwnerTableId } from "./tables/Owner.sol";
 import { Metdata, MetdataData, MetdataTableId } from "./tables/Metdata.sol";
 import { Cooldown, CooldownData, CooldownTableId } from "./tables/Cooldown.sol";
