@@ -56,5 +56,6 @@ export default mudConfig({
         reserve: "uint40",
       },
     },
+    MoveCommitment: "bytes32",
   },
 });

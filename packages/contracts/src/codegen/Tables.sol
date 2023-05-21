@@ -16,3 +16,4 @@ import { TotalSupply, TotalSupplyTableId } from "./tables/TotalSupply.sol";
 import { Owner, OwnerTableId } from "./tables/Owner.sol";
 import { Metdata, MetdataData, MetdataTableId } from "./tables/Metdata.sol";
 import { Cooldown, CooldownData, CooldownTableId } from "./tables/Cooldown.sol";
+import { MoveCommitment, MoveCommitmentTableId } from "./tables/MoveCommitment.sol";

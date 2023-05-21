@@ -209,5 +209,20 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    MoveCommitment: (() => {
+      const tableId = new TableId("", "MoveCommitment");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
   };
 }

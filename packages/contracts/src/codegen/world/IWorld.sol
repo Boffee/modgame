@@ -7,12 +7,13 @@ import { IBaseWorld } from "@latticexyz/world/src/interfaces/IBaseWorld.sol";
 
 import { IAuthedCooldownSystem } from "./IAuthedCooldownSystem.sol";
 import { IAuthedSystem } from "./IAuthedSystem.sol";
+import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
 
 /**
  * The IWorld interface includes all systems dynamically added to the World
  * during the deploy process.
  */
-interface IWorld is IBaseWorld, IAuthedCooldownSystem, IAuthedSystem, IMoveSystem {
+interface IWorld is IBaseWorld, IAuthedCooldownSystem, IAuthedSystem, ICommitMoveSystem, IMoveSystem {
 
 }
