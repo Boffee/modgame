@@ -52,7 +52,7 @@ export default mudConfig({
     },
     Cooldown: {
       schema: {
-        readyAt: "uint40",
+        endsAt: "uint40",
         reserve: "uint40",
       },
     },

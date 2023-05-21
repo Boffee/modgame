@@ -198,7 +198,7 @@ export function defineContractComponents(world: World) {
       return defineComponent(
         world,
         {
-          readyAt: RecsType.Number,
+          endsAt: RecsType.Number,
           reserve: RecsType.Number,
         },
         {

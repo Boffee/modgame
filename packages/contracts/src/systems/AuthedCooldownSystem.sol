@@ -28,7 +28,7 @@ contract AuthedCooldownSystem is AuthedSystem {
 
   function _isCooldownReady(bytes32 entity) internal view returns (bool) {
     CooldownData memory cooldown = Cooldown.get(entity);
-    return cooldown.readyAt - cooldown.reserve <= block.timestamp;
+    return cooldown.endsAt - cooldown.reserve <= block.timestamp;
   }
 
   /**
@@ -41,13 +41,13 @@ contract AuthedCooldownSystem is AuthedSystem {
     Cooldown.set(
       entity,
       CooldownData({
-        readyAt: uint40(block.timestamp + duration),
+        endsAt: uint40(block.timestamp + duration),
         reserve: uint40(
           Math.min(
             CreatureTypeStats.getCooldownReserveCapacity(
               CreatureTypeLib.get(entity)
             ),
-            block.timestamp - cooldown.readyAt - cooldown.reserve
+            block.timestamp - cooldown.endsAt - cooldown.reserve
           )
           )
       })

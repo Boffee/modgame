@@ -21,7 +21,7 @@ bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Coold
 bytes32 constant CooldownTableId = _tableId;
 
 struct CooldownData {
-  uint40 readyAt;
+  uint40 endsAt;
   uint40 reserve;
 }
 
@@ -45,7 +45,7 @@ library Cooldown {
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
     string[] memory _fieldNames = new string[](2);
-    _fieldNames[0] = "readyAt";
+    _fieldNames[0] = "endsAt";
     _fieldNames[1] = "reserve";
     return ("Cooldown", _fieldNames);
   }
@@ -72,8 +72,8 @@ library Cooldown {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get readyAt */
-  function getReadyAt(bytes32 key) internal view returns (uint40 readyAt) {
+  /** Get endsAt */
+  function getEndsAt(bytes32 key) internal view returns (uint40 endsAt) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -81,8 +81,8 @@ library Cooldown {
     return (uint40(Bytes.slice5(_blob, 0)));
   }
 
-  /** Get readyAt (using the specified store) */
-  function getReadyAt(IStore _store, bytes32 key) internal view returns (uint40 readyAt) {
+  /** Get endsAt (using the specified store) */
+  function getEndsAt(IStore _store, bytes32 key) internal view returns (uint40 endsAt) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -90,20 +90,20 @@ library Cooldown {
     return (uint40(Bytes.slice5(_blob, 0)));
   }
 
-  /** Set readyAt */
-  function setReadyAt(bytes32 key, uint40 readyAt) internal {
+  /** Set endsAt */
+  function setEndsAt(bytes32 key, uint40 endsAt) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((readyAt)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((endsAt)));
   }
 
-  /** Set readyAt (using the specified store) */
-  function setReadyAt(IStore _store, bytes32 key, uint40 readyAt) internal {
+  /** Set endsAt (using the specified store) */
+  function setEndsAt(IStore _store, bytes32 key, uint40 endsAt) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((readyAt)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((endsAt)));
   }
 
   /** Get reserve */
@@ -159,8 +159,8 @@ library Cooldown {
   }
 
   /** Set the full data using individual values */
-  function set(bytes32 key, uint40 readyAt, uint40 reserve) internal {
-    bytes memory _data = encode(readyAt, reserve);
+  function set(bytes32 key, uint40 endsAt, uint40 reserve) internal {
+    bytes memory _data = encode(endsAt, reserve);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -169,8 +169,8 @@ library Cooldown {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, bytes32 key, uint40 readyAt, uint40 reserve) internal {
-    bytes memory _data = encode(readyAt, reserve);
+  function set(IStore _store, bytes32 key, uint40 endsAt, uint40 reserve) internal {
+    bytes memory _data = encode(endsAt, reserve);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -180,24 +180,24 @@ library Cooldown {
 
   /** Set the full data using the data struct */
   function set(bytes32 key, CooldownData memory _table) internal {
-    set(key, _table.readyAt, _table.reserve);
+    set(key, _table.endsAt, _table.reserve);
   }
 
   /** Set the full data using the data struct (using the specified store) */
   function set(IStore _store, bytes32 key, CooldownData memory _table) internal {
-    set(_store, key, _table.readyAt, _table.reserve);
+    set(_store, key, _table.endsAt, _table.reserve);
   }
 
   /** Decode the tightly packed blob using this table's schema */
   function decode(bytes memory _blob) internal pure returns (CooldownData memory _table) {
-    _table.readyAt = (uint40(Bytes.slice5(_blob, 0)));
+    _table.endsAt = (uint40(Bytes.slice5(_blob, 0)));
 
     _table.reserve = (uint40(Bytes.slice5(_blob, 5)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(uint40 readyAt, uint40 reserve) internal view returns (bytes memory) {
-    return abi.encodePacked(readyAt, reserve);
+  function encode(uint40 endsAt, uint40 reserve) internal view returns (bytes memory) {
+    return abi.encodePacked(endsAt, reserve);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */
