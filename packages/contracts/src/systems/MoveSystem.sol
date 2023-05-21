@@ -4,6 +4,7 @@ pragma solidity >=0.8.0;
 import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
 import {CreatureStats} from "../codegen/tables/CreatureStats.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
+import {PositionLib} from "../libraries/PositionLib.sol";
 import {AuthedCooldownSystem} from "./AuthedCooldownSystem.sol";
 
 /**
@@ -24,15 +25,15 @@ contract MoveSystem is AuthedCooldownSystem {
     cooldownReady(entity)
   {
     _verifyPosition(entity, x, y);
-    Position.set(entity, PositionData({x: x, y: y}));
     _setCooldown(entity, CreatureStats.getMoveCooldown(entity));
+    Position.set(entity, PositionData({x: x, y: y}));
   }
 
   function _verifyPosition(bytes32 entity, int128 x, int128 y) internal view {
-    PositionData memory currPosition = Position.get(entity);
     require(
-      (currPosition.x - x).abs() + (currPosition.y - y).abs()
-        <= CreatureStats.getMoveDistance(entity),
+      PositionLib.withinDistance(
+        entity, x, y, CreatureStats.getMoveDistance(entity)
+      ),
       "Move distance too far"
     );
   }
