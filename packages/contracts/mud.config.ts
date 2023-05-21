@@ -2,15 +2,9 @@ import { mudConfig } from "@latticexyz/world/register";
 
 export default mudConfig({
   tables: {
-    Id: {
-      schema: "uint256",
-    },
-    Counter: {
-      schema: "uint256",
-    },
-    Creature: {
-      schema: "bytes32",
-    },
+    Id: "uint256",
+    Counter: "uint256",
+    Creature: "bytes32",
     CreatureStats: {
       schema: {
         lifespan: "uint40",
@@ -64,9 +58,7 @@ export default mudConfig({
       },
       schema: "uint256",
     },
-    Owner: {
-      schema: "address",
-    },
+    Owner: "address",
     Metdata: {
       schema: {
         createdAt: "uint40",
