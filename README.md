@@ -1,32 +1,59 @@
-Hook Callstack:
+# Architecture
 
 ```mermaid
 graph TD;
   c{Client} -.-> w[World]
-  w --> s[Move/Attack/etc. Systems]
-  s --> ps[Physics Subsystems]
-  ps --trigger hook--> php[Permissioned\nProxy Subsystem]
-  php --delegatecall--> h[Hook Handler\nImplementation System]
-  w --> ets[Entity Trigger System]
-  ets --> php
-  h --> ps
+  w --forward action--> s[Move/Attack/Trigger Systems]
+  s --interact with phsyics--> ps[Physics Subsystems]
+  ps --"call hook"--> php[Permissioned\nProxy Subsystem]
+  php --"delegatecall"--> h[Hook Handler\nImplementation System]
+  h --interact with phsyics--> ps
 ```
 
-Entities have:
+# Actions
 
-- stats
-- actions
-- reactions
+Actions (and their reactions) define how entities interaction with each other in the world. Actions restrict what entities can and can't do in the world, commonly known as the physics of the world.
+
+The set of actions that can be performed by any entity in the game are:
+
+- attack
+- move
+- trigger
+- create new entity types
+
+# Hooks
+
+Hooks allow entities to ON_TRIGGER additional actions before, during, or after an action is performed. Players can create mods with infinite complexity by creating and combining hooks.
+
+Currently, Mod Game supports the following hooks:
+
+- Move Hooks:
+  - **onEnter**: called when an entity enters a tile
+  - **onEnter**: called when an entity leaves a tile
+- Attack Hooks:
+  - **onAttack**: called when an entity attacks another entity
+  - **onHit**: called when an entity is hit by another entity
+  - **onKill**: called when an entity kills another entity
+- Trigger Hooks:
+  - **onTrigger**: called when an entity triggers another entity
+
+# Mods
+
+Players create mods by:
+
+1. Creating a new entity type
+2. Assigning attributes to the entity type
+3. Assigning hooks to the entity type
+
+The above can be completely done in using the client UI without code. However, it restricts you to the the set of existing hooks defined by the game and other players.
+
+For more advanced players, you can create custom hooks and add it to the game permissionlessly. The game will automatically enforce the access control of the hook (hooks can only interact with the world through actions; they cannot write to tables).
 
 # Access Control
 
 All mods inherit the access control of the `Permissioned Proxy Subsystem`, which is restricted to only the `Physics Subsystems`. This means mods are bound by the physics of the world defined in the `Physics Subsystems`.
 
 All mods are implemented as unregistered systems that are `delegatecall`ed by the `Permissioned Proxy Subsystem` to enforce access control.
-
-# Mods
-
-Mods can create temporary entities.
 
 # Game Modes
 
