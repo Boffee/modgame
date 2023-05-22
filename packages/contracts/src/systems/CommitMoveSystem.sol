@@ -2,8 +2,9 @@
 pragma solidity >=0.8.0;
 
 import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
-import {MoveStat} from "../codegen/tables/MoveStat.sol";
+import {IWorld} from "../codegen/world/IWorld.sol";
 import {Cooldown} from "../codegen/tables/Cooldown.sol";
+import {MoveStat} from "../codegen/tables/MoveStat.sol";
 import {MoveCommitment} from "../codegen/tables/MoveCommitment.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
@@ -40,8 +41,7 @@ contract CommitMoveSystem is AuthedCooldownSystem {
   {
     _verifySalt(entity, x, y, salt);
     _verifyPosition(entity, x, y);
-    Position.setX(entity, x);
-    Position.setY(entity, y);
+    IWorld(_world())._move(entity, x, y);
   }
 
   function _verifySalt(bytes32 entity, int128 x, int128 y, bytes32 salt)

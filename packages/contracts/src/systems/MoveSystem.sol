@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0;
 
 import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
+import {IWorld} from "../codegen/world/IWorld.sol";
 import {MoveStat} from "../codegen/tables/MoveStat.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
@@ -28,8 +29,7 @@ contract MoveSystem is AuthedCooldownSystem {
   {
     _verifyPosition(entity, x, y);
     _setCooldown(entity, MoveStat.getCooldown(TypeLib.get(entity)));
-    Position.setX(entity, x);
-    Position.setY(entity, y);
+    IWorld(_world())._move(entity, x, y);
   }
 
   function _verifyPosition(bytes32 entity, int128 x, int128 y) internal view {

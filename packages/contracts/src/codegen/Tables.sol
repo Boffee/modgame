@@ -7,6 +7,7 @@ import { Id, IdTableId } from "./tables/Id.sol";
 import { Counter, CounterTableId } from "./tables/Counter.sol";
 import { Type, TypeTableId } from "./tables/Type.sol";
 import { MoveStat, MoveStatData, MoveStatTableId } from "./tables/MoveStat.sol";
+import { Hook, HookTableId } from "./tables/Hook.sol";
 import { AttackStat, AttackStatData, AttackStatTableId } from "./tables/AttackStat.sol";
 import { Mutation, MutationData, MutationTableId } from "./tables/Mutation.sol";
 import { Predation, PredationTableId } from "./tables/Predation.sol";

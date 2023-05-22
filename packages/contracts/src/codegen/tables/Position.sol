@@ -17,25 +17,20 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-// Import user types
-import { PositionLevel } from "./../Types.sol";
-
 bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Position")));
 bytes32 constant PositionTableId = _tableId;
 
 struct PositionData {
   int128 x;
   int128 y;
-  PositionLevel level;
 }
 
 library Position {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
-    SchemaType[] memory _schema = new SchemaType[](3);
+    SchemaType[] memory _schema = new SchemaType[](2);
     _schema[0] = SchemaType.INT128;
     _schema[1] = SchemaType.INT128;
-    _schema[2] = SchemaType.UINT8;
 
     return SchemaLib.encode(_schema);
   }
@@ -49,10 +44,9 @@ library Position {
 
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
-    string[] memory _fieldNames = new string[](3);
+    string[] memory _fieldNames = new string[](2);
     _fieldNames[0] = "x";
     _fieldNames[1] = "y";
-    _fieldNames[2] = "level";
     return ("Position", _fieldNames);
   }
 
@@ -146,40 +140,6 @@ library Position {
     _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((y)));
   }
 
-  /** Get level */
-  function getLevel(bytes32 key) internal view returns (PositionLevel level) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 2);
-    return PositionLevel(uint8(Bytes.slice1(_blob, 0)));
-  }
-
-  /** Get level (using the specified store) */
-  function getLevel(IStore _store, bytes32 key) internal view returns (PositionLevel level) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    bytes memory _blob = _store.getField(_tableId, _keyTuple, 2);
-    return PositionLevel(uint8(Bytes.slice1(_blob, 0)));
-  }
-
-  /** Set level */
-  function setLevel(bytes32 key, PositionLevel level) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    StoreSwitch.setField(_tableId, _keyTuple, 2, abi.encodePacked(uint8(level)));
-  }
-
-  /** Set level (using the specified store) */
-  function setLevel(IStore _store, bytes32 key, PositionLevel level) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    _store.setField(_tableId, _keyTuple, 2, abi.encodePacked(uint8(level)));
-  }
-
   /** Get the full data */
   function get(bytes32 key) internal view returns (PositionData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
@@ -199,8 +159,8 @@ library Position {
   }
 
   /** Set the full data using individual values */
-  function set(bytes32 key, int128 x, int128 y, PositionLevel level) internal {
-    bytes memory _data = encode(x, y, level);
+  function set(bytes32 key, int128 x, int128 y) internal {
+    bytes memory _data = encode(x, y);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -209,8 +169,8 @@ library Position {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, bytes32 key, int128 x, int128 y, PositionLevel level) internal {
-    bytes memory _data = encode(x, y, level);
+  function set(IStore _store, bytes32 key, int128 x, int128 y) internal {
+    bytes memory _data = encode(x, y);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -220,12 +180,12 @@ library Position {
 
   /** Set the full data using the data struct */
   function set(bytes32 key, PositionData memory _table) internal {
-    set(key, _table.x, _table.y, _table.level);
+    set(key, _table.x, _table.y);
   }
 
   /** Set the full data using the data struct (using the specified store) */
   function set(IStore _store, bytes32 key, PositionData memory _table) internal {
-    set(_store, key, _table.x, _table.y, _table.level);
+    set(_store, key, _table.x, _table.y);
   }
 
   /** Decode the tightly packed blob using this table's schema */
@@ -233,13 +193,11 @@ library Position {
     _table.x = (int128(uint128(Bytes.slice16(_blob, 0))));
 
     _table.y = (int128(uint128(Bytes.slice16(_blob, 16))));
-
-    _table.level = PositionLevel(uint8(Bytes.slice1(_blob, 32)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(int128 x, int128 y, PositionLevel level) internal view returns (bytes memory) {
-    return abi.encodePacked(x, y, level);
+  function encode(int128 x, int128 y) internal view returns (bytes memory) {
+    return abi.encodePacked(x, y);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

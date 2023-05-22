@@ -66,6 +66,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    Hook: (() => {
+      const tableId = new TableId("", "Hook");
+      return defineComponent(
+        world,
+        {
+          selector: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     AttackStat: (() => {
       const tableId = new TableId("", "AttackStat");
       return defineComponent(
@@ -120,7 +135,6 @@ export function defineContractComponents(world: World) {
         {
           x: RecsType.BigInt,
           y: RecsType.BigInt,
-          level: RecsType.Number,
         },
         {
           metadata: {

@@ -1,6 +1,12 @@
 import { mudConfig, resolveTableId } from "@latticexyz/world/register";
 
 export default mudConfig({
+  systems: {
+    MoveSubSystem: {
+      openAccess: false,
+      accessList: [],
+    },
+  },
   tables: {
     Id: "uint256",
     Counter: "uint256",
@@ -9,6 +15,15 @@ export default mudConfig({
       schema: {
         maxDistance: "uint32",
         cooldown: "uint32",
+      },
+    },
+    Hook: {
+      keySchema: {
+        entityType: "bytes32",
+        hookType: "bytes32",
+      },
+      schema: {
+        selector: "bytes4",
       },
     },
     AttackStat: {
@@ -34,7 +49,6 @@ export default mudConfig({
       schema: {
         x: "int128",
         y: "int128",
-        level: "PositionLevel",
       },
     },
     Balance: {
@@ -67,7 +81,7 @@ export default mudConfig({
     {
       name: "KeysWithValueModule",
       root: true,
-      args: [resolveTableId("PositionTable")],
+      args: [resolveTableId("Position")],
     },
   ],
 });
