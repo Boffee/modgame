@@ -1,24 +1,25 @@
-import { mudConfig } from "@latticexyz/world/register";
+import { mudConfig, resolveTableId } from "@latticexyz/world/register";
 
 export default mudConfig({
   tables: {
     Id: "uint256",
     Counter: "uint256",
-    CreatureType: "bytes32",
-    CreatureTypeLineage: "bytes32",
-    CreatureTypeStats: {
+    Type: "bytes32",
+    MoveStat: {
       schema: {
-        lifespan: "uint40",
-        moveDistance: "uint8",
-        moveCooldown: "uint40",
-        attackDistance: "uint8",
-        attackCooldown: "uint40",
-        cooldownReserveCapacity: "uint40",
+        maxDistance: "uint32",
+        cooldown: "uint32",
       },
     },
-    CreatureMutation: {
+    AttackStat: {
       schema: {
-        creature: "bytes32",
+        maxDistance: "uint32",
+        cooldown: "uint32",
+      },
+    },
+    Mutation: {
+      schema: {
+        entityType: "bytes32",
         endsAt: "uint40",
       },
     },
@@ -33,6 +34,7 @@ export default mudConfig({
       schema: {
         x: "int128",
         y: "int128",
+        level: "PositionLevel",
       },
     },
     Balance: {
@@ -58,4 +60,14 @@ export default mudConfig({
     },
     MoveCommitment: "bytes32",
   },
+  enums: {
+    PositionLevel: ["Underground", "Surface"],
+  },
+  modules: [
+    {
+      name: "KeysWithValueModule",
+      root: true,
+      args: [resolveTableId("PositionTable")],
+    },
+  ],
 });

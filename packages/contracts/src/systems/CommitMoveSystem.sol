@@ -2,12 +2,12 @@
 pragma solidity >=0.8.0;
 
 import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
-import {CreatureTypeStats} from "../codegen/tables/CreatureTypeStats.sol";
+import {MoveStat} from "../codegen/tables/MoveStat.sol";
 import {Cooldown} from "../codegen/tables/Cooldown.sol";
 import {MoveCommitment} from "../codegen/tables/MoveCommitment.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
-import {CreatureTypeLib} from "../libraries/CreatureTypeLib.sol";
+import {TypeLib} from "../libraries/TypeLib.sol";
 import {AuthedCooldownSystem} from "./AuthedCooldownSystem.sol";
 
 /**
@@ -15,7 +15,7 @@ import {AuthedCooldownSystem} from "./AuthedCooldownSystem.sol";
  */
 contract CommitMoveSystem is AuthedCooldownSystem {
   using SignedMath for int128;
-  using CreatureTypeLib for bytes32;
+  using TypeLib for bytes32;
 
   function commitMove(bytes32 entity, bytes32 commitment)
     external
@@ -40,7 +40,8 @@ contract CommitMoveSystem is AuthedCooldownSystem {
   {
     _verifySalt(entity, x, y, salt);
     _verifyPosition(entity, x, y);
-    Position.set(entity, PositionData({x: x, y: y}));
+    Position.setX(entity, x);
+    Position.setY(entity, y);
   }
 
   function _verifySalt(bytes32 entity, int128 x, int128 y, bytes32 salt)
@@ -56,10 +57,7 @@ contract CommitMoveSystem is AuthedCooldownSystem {
   function _verifyPosition(bytes32 entity, int128 x, int128 y) internal view {
     require(
       PositionLib.withinDistance(
-        entity,
-        x,
-        y,
-        CreatureTypeStats.getMoveDistance(CreatureTypeLib.get(entity))
+        entity, x, y, MoveStat.getMaxDistance(TypeLib.get(entity))
       ),
       "Move distance too far"
     );

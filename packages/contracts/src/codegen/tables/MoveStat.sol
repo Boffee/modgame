@@ -17,25 +17,20 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-// Import user types
-import { PositionLevel } from "./../Types.sol";
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("MoveStat")));
+bytes32 constant MoveStatTableId = _tableId;
 
-bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Position")));
-bytes32 constant PositionTableId = _tableId;
-
-struct PositionData {
-  int128 x;
-  int128 y;
-  PositionLevel level;
+struct MoveStatData {
+  uint32 maxDistance;
+  uint32 cooldown;
 }
 
-library Position {
+library MoveStat {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
-    SchemaType[] memory _schema = new SchemaType[](3);
-    _schema[0] = SchemaType.INT128;
-    _schema[1] = SchemaType.INT128;
-    _schema[2] = SchemaType.UINT8;
+    SchemaType[] memory _schema = new SchemaType[](2);
+    _schema[0] = SchemaType.UINT32;
+    _schema[1] = SchemaType.UINT32;
 
     return SchemaLib.encode(_schema);
   }
@@ -49,11 +44,10 @@ library Position {
 
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
-    string[] memory _fieldNames = new string[](3);
-    _fieldNames[0] = "x";
-    _fieldNames[1] = "y";
-    _fieldNames[2] = "level";
-    return ("Position", _fieldNames);
+    string[] memory _fieldNames = new string[](2);
+    _fieldNames[0] = "maxDistance";
+    _fieldNames[1] = "cooldown";
+    return ("MoveStat", _fieldNames);
   }
 
   /** Register the table's schema */
@@ -78,110 +72,76 @@ library Position {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get x */
-  function getX(bytes32 key) internal view returns (int128 x) {
+  /** Get maxDistance */
+  function getMaxDistance(bytes32 key) internal view returns (uint32 maxDistance) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 0);
-    return (int128(uint128(Bytes.slice16(_blob, 0))));
+    return (uint32(Bytes.slice4(_blob, 0)));
   }
 
-  /** Get x (using the specified store) */
-  function getX(IStore _store, bytes32 key) internal view returns (int128 x) {
+  /** Get maxDistance (using the specified store) */
+  function getMaxDistance(IStore _store, bytes32 key) internal view returns (uint32 maxDistance) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 0);
-    return (int128(uint128(Bytes.slice16(_blob, 0))));
+    return (uint32(Bytes.slice4(_blob, 0)));
   }
 
-  /** Set x */
-  function setX(bytes32 key, int128 x) internal {
+  /** Set maxDistance */
+  function setMaxDistance(bytes32 key, uint32 maxDistance) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((x)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((maxDistance)));
   }
 
-  /** Set x (using the specified store) */
-  function setX(IStore _store, bytes32 key, int128 x) internal {
+  /** Set maxDistance (using the specified store) */
+  function setMaxDistance(IStore _store, bytes32 key, uint32 maxDistance) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((x)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((maxDistance)));
   }
 
-  /** Get y */
-  function getY(bytes32 key) internal view returns (int128 y) {
+  /** Get cooldown */
+  function getCooldown(bytes32 key) internal view returns (uint32 cooldown) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 1);
-    return (int128(uint128(Bytes.slice16(_blob, 0))));
+    return (uint32(Bytes.slice4(_blob, 0)));
   }
 
-  /** Get y (using the specified store) */
-  function getY(IStore _store, bytes32 key) internal view returns (int128 y) {
+  /** Get cooldown (using the specified store) */
+  function getCooldown(IStore _store, bytes32 key) internal view returns (uint32 cooldown) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 1);
-    return (int128(uint128(Bytes.slice16(_blob, 0))));
+    return (uint32(Bytes.slice4(_blob, 0)));
   }
 
-  /** Set y */
-  function setY(bytes32 key, int128 y) internal {
+  /** Set cooldown */
+  function setCooldown(bytes32 key, uint32 cooldown) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 1, abi.encodePacked((y)));
+    StoreSwitch.setField(_tableId, _keyTuple, 1, abi.encodePacked((cooldown)));
   }
 
-  /** Set y (using the specified store) */
-  function setY(IStore _store, bytes32 key, int128 y) internal {
+  /** Set cooldown (using the specified store) */
+  function setCooldown(IStore _store, bytes32 key, uint32 cooldown) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((y)));
-  }
-
-  /** Get level */
-  function getLevel(bytes32 key) internal view returns (PositionLevel level) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 2);
-    return PositionLevel(uint8(Bytes.slice1(_blob, 0)));
-  }
-
-  /** Get level (using the specified store) */
-  function getLevel(IStore _store, bytes32 key) internal view returns (PositionLevel level) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    bytes memory _blob = _store.getField(_tableId, _keyTuple, 2);
-    return PositionLevel(uint8(Bytes.slice1(_blob, 0)));
-  }
-
-  /** Set level */
-  function setLevel(bytes32 key, PositionLevel level) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    StoreSwitch.setField(_tableId, _keyTuple, 2, abi.encodePacked(uint8(level)));
-  }
-
-  /** Set level (using the specified store) */
-  function setLevel(IStore _store, bytes32 key, PositionLevel level) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = bytes32((key));
-
-    _store.setField(_tableId, _keyTuple, 2, abi.encodePacked(uint8(level)));
+    _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((cooldown)));
   }
 
   /** Get the full data */
-  function get(bytes32 key) internal view returns (PositionData memory _table) {
+  function get(bytes32 key) internal view returns (MoveStatData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -190,7 +150,7 @@ library Position {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (PositionData memory _table) {
+  function get(IStore _store, bytes32 key) internal view returns (MoveStatData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -199,8 +159,8 @@ library Position {
   }
 
   /** Set the full data using individual values */
-  function set(bytes32 key, int128 x, int128 y, PositionLevel level) internal {
-    bytes memory _data = encode(x, y, level);
+  function set(bytes32 key, uint32 maxDistance, uint32 cooldown) internal {
+    bytes memory _data = encode(maxDistance, cooldown);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -209,8 +169,8 @@ library Position {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, bytes32 key, int128 x, int128 y, PositionLevel level) internal {
-    bytes memory _data = encode(x, y, level);
+  function set(IStore _store, bytes32 key, uint32 maxDistance, uint32 cooldown) internal {
+    bytes memory _data = encode(maxDistance, cooldown);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -219,27 +179,25 @@ library Position {
   }
 
   /** Set the full data using the data struct */
-  function set(bytes32 key, PositionData memory _table) internal {
-    set(key, _table.x, _table.y, _table.level);
+  function set(bytes32 key, MoveStatData memory _table) internal {
+    set(key, _table.maxDistance, _table.cooldown);
   }
 
   /** Set the full data using the data struct (using the specified store) */
-  function set(IStore _store, bytes32 key, PositionData memory _table) internal {
-    set(_store, key, _table.x, _table.y, _table.level);
+  function set(IStore _store, bytes32 key, MoveStatData memory _table) internal {
+    set(_store, key, _table.maxDistance, _table.cooldown);
   }
 
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal pure returns (PositionData memory _table) {
-    _table.x = (int128(uint128(Bytes.slice16(_blob, 0))));
+  function decode(bytes memory _blob) internal pure returns (MoveStatData memory _table) {
+    _table.maxDistance = (uint32(Bytes.slice4(_blob, 0)));
 
-    _table.y = (int128(uint128(Bytes.slice16(_blob, 16))));
-
-    _table.level = PositionLevel(uint8(Bytes.slice1(_blob, 32)));
+    _table.cooldown = (uint32(Bytes.slice4(_blob, 4)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(int128 x, int128 y, PositionLevel level) internal view returns (bytes memory) {
-    return abi.encodePacked(x, y, level);
+  function encode(uint32 maxDistance, uint32 cooldown) internal view returns (bytes memory) {
+    return abi.encodePacked(maxDistance, cooldown);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

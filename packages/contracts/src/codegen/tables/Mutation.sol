@@ -17,15 +17,15 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("CreatureMutation")));
-bytes32 constant CreatureMutationTableId = _tableId;
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Mutation")));
+bytes32 constant MutationTableId = _tableId;
 
-struct CreatureMutationData {
-  bytes32 creature;
+struct MutationData {
+  bytes32 entityType;
   uint40 endsAt;
 }
 
-library CreatureMutation {
+library Mutation {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
     SchemaType[] memory _schema = new SchemaType[](2);
@@ -45,9 +45,9 @@ library CreatureMutation {
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
     string[] memory _fieldNames = new string[](2);
-    _fieldNames[0] = "creature";
+    _fieldNames[0] = "entityType";
     _fieldNames[1] = "endsAt";
-    return ("CreatureMutation", _fieldNames);
+    return ("Mutation", _fieldNames);
   }
 
   /** Register the table's schema */
@@ -72,8 +72,8 @@ library CreatureMutation {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get creature */
-  function getCreature(bytes32 key) internal view returns (bytes32 creature) {
+  /** Get entityType */
+  function getEntityType(bytes32 key) internal view returns (bytes32 entityType) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -81,8 +81,8 @@ library CreatureMutation {
     return (Bytes.slice32(_blob, 0));
   }
 
-  /** Get creature (using the specified store) */
-  function getCreature(IStore _store, bytes32 key) internal view returns (bytes32 creature) {
+  /** Get entityType (using the specified store) */
+  function getEntityType(IStore _store, bytes32 key) internal view returns (bytes32 entityType) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -90,20 +90,20 @@ library CreatureMutation {
     return (Bytes.slice32(_blob, 0));
   }
 
-  /** Set creature */
-  function setCreature(bytes32 key, bytes32 creature) internal {
+  /** Set entityType */
+  function setEntityType(bytes32 key, bytes32 entityType) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((creature)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((entityType)));
   }
 
-  /** Set creature (using the specified store) */
-  function setCreature(IStore _store, bytes32 key, bytes32 creature) internal {
+  /** Set entityType (using the specified store) */
+  function setEntityType(IStore _store, bytes32 key, bytes32 entityType) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((creature)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((entityType)));
   }
 
   /** Get endsAt */
@@ -141,7 +141,7 @@ library CreatureMutation {
   }
 
   /** Get the full data */
-  function get(bytes32 key) internal view returns (CreatureMutationData memory _table) {
+  function get(bytes32 key) internal view returns (MutationData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -150,7 +150,7 @@ library CreatureMutation {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (CreatureMutationData memory _table) {
+  function get(IStore _store, bytes32 key) internal view returns (MutationData memory _table) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -159,8 +159,8 @@ library CreatureMutation {
   }
 
   /** Set the full data using individual values */
-  function set(bytes32 key, bytes32 creature, uint40 endsAt) internal {
-    bytes memory _data = encode(creature, endsAt);
+  function set(bytes32 key, bytes32 entityType, uint40 endsAt) internal {
+    bytes memory _data = encode(entityType, endsAt);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -169,8 +169,8 @@ library CreatureMutation {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, bytes32 key, bytes32 creature, uint40 endsAt) internal {
-    bytes memory _data = encode(creature, endsAt);
+  function set(IStore _store, bytes32 key, bytes32 entityType, uint40 endsAt) internal {
+    bytes memory _data = encode(entityType, endsAt);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -179,25 +179,25 @@ library CreatureMutation {
   }
 
   /** Set the full data using the data struct */
-  function set(bytes32 key, CreatureMutationData memory _table) internal {
-    set(key, _table.creature, _table.endsAt);
+  function set(bytes32 key, MutationData memory _table) internal {
+    set(key, _table.entityType, _table.endsAt);
   }
 
   /** Set the full data using the data struct (using the specified store) */
-  function set(IStore _store, bytes32 key, CreatureMutationData memory _table) internal {
-    set(_store, key, _table.creature, _table.endsAt);
+  function set(IStore _store, bytes32 key, MutationData memory _table) internal {
+    set(_store, key, _table.entityType, _table.endsAt);
   }
 
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal pure returns (CreatureMutationData memory _table) {
-    _table.creature = (Bytes.slice32(_blob, 0));
+  function decode(bytes memory _blob) internal pure returns (MutationData memory _table) {
+    _table.entityType = (Bytes.slice32(_blob, 0));
 
     _table.endsAt = (uint40(Bytes.slice5(_blob, 32)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(bytes32 creature, uint40 endsAt) internal view returns (bytes memory) {
-    return abi.encodePacked(creature, endsAt);
+  function encode(bytes32 entityType, uint40 endsAt) internal view returns (bytes memory) {
+    return abi.encodePacked(entityType, endsAt);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

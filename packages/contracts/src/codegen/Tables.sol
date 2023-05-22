@@ -5,10 +5,10 @@ pragma solidity >=0.8.0;
 
 import { Id, IdTableId } from "./tables/Id.sol";
 import { Counter, CounterTableId } from "./tables/Counter.sol";
-import { CreatureType, CreatureTypeTableId } from "./tables/CreatureType.sol";
-import { CreatureTypeLineage, CreatureTypeLineageTableId } from "./tables/CreatureTypeLineage.sol";
-import { CreatureTypeStats, CreatureTypeStatsData, CreatureTypeStatsTableId } from "./tables/CreatureTypeStats.sol";
-import { CreatureMutation, CreatureMutationData, CreatureMutationTableId } from "./tables/CreatureMutation.sol";
+import { Type, TypeTableId } from "./tables/Type.sol";
+import { MoveStat, MoveStatData, MoveStatTableId } from "./tables/MoveStat.sol";
+import { AttackStat, AttackStatData, AttackStatTableId } from "./tables/AttackStat.sol";
+import { Mutation, MutationData, MutationTableId } from "./tables/Mutation.sol";
 import { Predation, PredationTableId } from "./tables/Predation.sol";
 import { Position, PositionData, PositionTableId } from "./tables/Position.sol";
 import { Balance, BalanceTableId } from "./tables/Balance.sol";

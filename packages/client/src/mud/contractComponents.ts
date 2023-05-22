@@ -35,8 +35,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureType: (() => {
-      const tableId = new TableId("", "CreatureType");
+    Type: (() => {
+      const tableId = new TableId("", "Type");
       return defineComponent(
         world,
         {
@@ -50,12 +50,13 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureTypeLineage: (() => {
-      const tableId = new TableId("", "CreatureTypeLine");
+    MoveStat: (() => {
+      const tableId = new TableId("", "MoveStat");
       return defineComponent(
         world,
         {
-          value: RecsType.String,
+          maxDistance: RecsType.Number,
+          cooldown: RecsType.Number,
         },
         {
           metadata: {
@@ -65,17 +66,13 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureTypeStats: (() => {
-      const tableId = new TableId("", "CreatureTypeStat");
+    AttackStat: (() => {
+      const tableId = new TableId("", "AttackStat");
       return defineComponent(
         world,
         {
-          lifespan: RecsType.Number,
-          moveDistance: RecsType.Number,
-          moveCooldown: RecsType.Number,
-          attackDistance: RecsType.Number,
-          attackCooldown: RecsType.Number,
-          cooldownReserveCapacity: RecsType.Number,
+          maxDistance: RecsType.Number,
+          cooldown: RecsType.Number,
         },
         {
           metadata: {
@@ -85,12 +82,12 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    CreatureMutation: (() => {
-      const tableId = new TableId("", "CreatureMutation");
+    Mutation: (() => {
+      const tableId = new TableId("", "Mutation");
       return defineComponent(
         world,
         {
-          creature: RecsType.String,
+          entityType: RecsType.String,
           endsAt: RecsType.Number,
         },
         {
@@ -123,6 +120,7 @@ export function defineContractComponents(world: World) {
         {
           x: RecsType.BigInt,
           y: RecsType.BigInt,
+          level: RecsType.Number,
         },
         {
           metadata: {
