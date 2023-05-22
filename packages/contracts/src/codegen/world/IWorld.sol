@@ -13,6 +13,7 @@ import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IEntityHookSystem } from "./IEntityHookSystem.sol";
 import { IMoveSubSystem } from "./IMoveSubSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
+import { IRegisterModSystem } from "./IRegisterModSystem.sol";
 import { ISpawnSystem } from "./ISpawnSystem.sol";
 
 /**
@@ -29,6 +30,7 @@ interface IWorld is
   IEntityHookSystem,
   IMoveSubSystem,
   IMoveSystem,
+  IRegisterModSystem,
   ISpawnSystem
 {
 

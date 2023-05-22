@@ -19,6 +19,11 @@ export default mudConfig({
     Token: "bytes32",
     Id: "uint256",
     Type: "bytes32",
+    IsMod: "bool",
+    ModList: {
+      keySchema: {},
+      schema: "bytes32[]",
+    },
     Orientation: "OrientationType",
     MoveStat: {
       schema: {
