@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-bytes32 constant ENTER = bytes32("ENTER");
-bytes32 constant LEAVE = bytes32("LEAVE");
-bytes32 constant TRIGGER = bytes32("TRIGGER");
-bytes32 constant BEFORE_ATTACKED = bytes32("BEFORE_ATTACKED");
-bytes32 constant AFTER_ATTACKED = bytes32("AFTER_ATTACKED");
-bytes32 constant BEFORE_ATTACK = bytes32("BEFORE_ATTACK");
-bytes32 constant AFTER_ATTACK = bytes32("AFTER_ATTACK");
+bytes32 constant ON_ENTER = bytes32("ON_ENTER");
+bytes32 constant ON_LEAVE = bytes32("ON_LEAVE");
+bytes32 constant ON_TRIGGER = bytes32("ON_TRIGGER");
+bytes32 constant ON_ATTACK = bytes32("ON_ATTACK");
+bytes32 constant ON_HIT = bytes32("ON_HIT");
+bytes32 constant ON_KILL = bytes32("ON_KILL");
 
 bytes32 constant PLAYER_TOKEN = bytes32("PLAYER_TOKEN");
 

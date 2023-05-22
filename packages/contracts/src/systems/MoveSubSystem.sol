@@ -11,7 +11,7 @@ import {
   PositionTableId
 } from "../codegen/tables/Position.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
-import {ENTER, LEAVE} from "../constants.sol";
+import {ON_ENTER, ON_LEAVE} from "../constants.sol";
 import {EntityHookSystem} from "./EntityHookSystem.sol";
 
 /**
@@ -22,7 +22,7 @@ contract MoveSubSystem is EntityHookSystem {
 
   function _move(bytes32 entity, int128 x, int128 y) external {
     _callHooks(
-      LEAVE,
+      ON_LEAVE,
       entity,
       getKeysWithValue(
         PositionTableId,
@@ -34,7 +34,7 @@ contract MoveSubSystem is EntityHookSystem {
     Position.setY(entity, y);
 
     _callHooks(
-      ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
+      ON_ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
     );
   }
 
@@ -47,7 +47,7 @@ contract MoveSubSystem is EntityHookSystem {
     bytes32[] memory targetEntities =
       getKeysWithValue(PositionTableId, Position.encode(x, y));
     for (uint256 i = 0; i < length; i++) {
-      _callHooks(LEAVE, entity, targetEntities);
+      _callHooks(ON_LEAVE, entity, targetEntities);
 
       uint256 direction = 3 & (directions >> (i * 2));
       if (direction == 0) {
@@ -65,7 +65,7 @@ contract MoveSubSystem is EntityHookSystem {
       }
 
       targetEntities = getKeysWithValue(PositionTableId, Position.encode(x, y));
-      _callHooks(ENTER, entity, targetEntities);
+      _callHooks(ON_ENTER, entity, targetEntities);
     }
 
     Position.setX(entity, x);

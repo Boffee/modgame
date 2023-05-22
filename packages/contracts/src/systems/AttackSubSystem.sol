@@ -17,16 +17,19 @@ import {PositionLib} from "../libraries/PositionLib.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
 import {EntityHookSystem} from "./EntityHookSystem.sol";
-import {BEFORE_ATTACKED, AFTER_ATTACKED, PLAYER_TOKEN} from "../constants.sol";
+import {ON_ATTACK, ON_HIT, ON_KILL, PLAYER_TOKEN} from "../constants.sol";
 
 contract AttackSubSystem is EntityHookSystem {
   using TypeLib for bytes32;
 
   function _attack(bytes32 source, bytes32 target) public {
-    _callHook(BEFORE_ATTACKED, source, target);
+    _callHook(ON_ATTACK, source, target);
 
     bool isPredator = Predation.get(source, target);
     bool isPrey = Predation.get(target, source);
+
+    _callHook(ON_HIT, source, target);
+
     if (isPredator && !isPrey) {
       _kill(source, target);
     } else if (isPrey && !isPredator) {
@@ -34,14 +37,15 @@ contract AttackSubSystem is EntityHookSystem {
     } else {
       _die(target);
       _die(source);
+      _callHook(ON_KILL, source, target);
+      _callHook(ON_KILL, target, source);
     }
-
-    _callHook(AFTER_ATTACKED, source, target);
   }
 
   function _kill(bytes32 source, bytes32 target) public {
     _verifyPosition(source, target);
     _die(target);
+    _callHook(ON_KILL, source, target);
     // TODO: handle item pickup
   }
 
