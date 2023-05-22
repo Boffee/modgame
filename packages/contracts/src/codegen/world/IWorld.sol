@@ -11,8 +11,10 @@ import { IAuthedCooldownSystem } from "./IAuthedCooldownSystem.sol";
 import { IAuthedSystem } from "./IAuthedSystem.sol";
 import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IEntityHookSystem } from "./IEntityHookSystem.sol";
+import { IHookHandlerProxySubSystem } from "./IHookHandlerProxySubSystem.sol";
 import { IMoveSubSystem } from "./IMoveSubSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
+import { IRegisterHookHandlerSystem } from "./IRegisterHookHandlerSystem.sol";
 import { IRegisterModSystem } from "./IRegisterModSystem.sol";
 import { ISpawnSystem } from "./ISpawnSystem.sol";
 
@@ -28,8 +30,10 @@ interface IWorld is
   IAuthedSystem,
   ICommitMoveSystem,
   IEntityHookSystem,
+  IHookHandlerProxySubSystem,
   IMoveSubSystem,
   IMoveSystem,
+  IRegisterHookHandlerSystem,
   IRegisterModSystem,
   ISpawnSystem
 {

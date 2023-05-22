@@ -11,7 +11,6 @@ import {
 } from "../codegen/tables/Position.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {Predation} from "../codegen/tables/Predation.sol";
-import {Hook} from "../codegen/tables/Hook.sol";
 import {Id} from "../codegen/tables/Id.sol";
 import {Token} from "../codegen/tables/Token.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";

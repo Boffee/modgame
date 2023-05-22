@@ -4,7 +4,8 @@ pragma solidity >=0.8.0;
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 import {System} from "@latticexyz/world/src/System.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
-import {Hook} from "../codegen/tables/Hook.sol";
+import {HookHandler} from "../codegen/tables/HookHandler.sol";
+import {IHookHandlerProxySubSystem} from "../codegen/world/IWorld.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 
 contract EntityHookSystem is System {
@@ -19,11 +20,7 @@ contract EntityHookSystem is System {
   }
 
   function _callHook(bytes32 hookType, bytes32 source, bytes32 target) internal {
-    _call(Hook.get(hookType, TypeLib.get(target)), abi.encode(source, target));
-  }
-
-  function _call(bytes4 selector, bytes memory args) internal {
-    _call(abi.encodePacked(selector, args));
+    IHookHandlerProxySubSystem(_world()).execute(hookType, source, target);
   }
 
   function _call(bytes memory selectorAndArgs) internal {

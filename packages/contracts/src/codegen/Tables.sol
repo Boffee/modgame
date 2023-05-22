@@ -10,7 +10,7 @@ import { Immutable, ImmutableTableId } from "./tables/Immutable.sol";
 import { ModList, ModListTableId } from "./tables/ModList.sol";
 import { Orientation, OrientationTableId } from "./tables/Orientation.sol";
 import { MoveStat, MoveStatData, MoveStatTableId } from "./tables/MoveStat.sol";
-import { Hook, HookTableId } from "./tables/Hook.sol";
+import { HookHandler, HookHandlerTableId } from "./tables/HookHandler.sol";
 import { AttackStat, AttackStatData, AttackStatTableId } from "./tables/AttackStat.sol";
 import { Mutation, MutationData, MutationTableId } from "./tables/Mutation.sol";
 import { Predation, PredationTableId } from "./tables/Predation.sol";

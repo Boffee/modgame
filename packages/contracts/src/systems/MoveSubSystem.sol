@@ -10,7 +10,6 @@ import {
   PositionData,
   PositionTableId
 } from "../codegen/tables/Position.sol";
-import {Hook} from "../codegen/tables/Hook.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {ENTER, LEAVE} from "../constants.sol";
 import {EntityHookSystem} from "./EntityHookSystem.sol";

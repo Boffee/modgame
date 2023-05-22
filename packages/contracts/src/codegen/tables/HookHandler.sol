@@ -17,14 +17,14 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
-bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Hook")));
-bytes32 constant HookTableId = _tableId;
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("HookHandler")));
+bytes32 constant HookHandlerTableId = _tableId;
 
-library Hook {
+library HookHandler {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
     SchemaType[] memory _schema = new SchemaType[](1);
-    _schema[0] = SchemaType.BYTES4;
+    _schema[0] = SchemaType.ADDRESS;
 
     return SchemaLib.encode(_schema);
   }
@@ -40,8 +40,8 @@ library Hook {
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
     string[] memory _fieldNames = new string[](1);
-    _fieldNames[0] = "selector";
-    return ("Hook", _fieldNames);
+    _fieldNames[0] = "value";
+    return ("HookHandler", _fieldNames);
   }
 
   /** Register the table's schema */
@@ -66,47 +66,47 @@ library Hook {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get selector */
-  function get(bytes32 entityType, bytes32 hookType) internal view returns (bytes4 selector) {
+  /** Get value */
+  function get(bytes32 entityType, bytes32 hookType) internal view returns (address value) {
     bytes32[] memory _keyTuple = new bytes32[](2);
     _keyTuple[0] = bytes32((entityType));
     _keyTuple[1] = bytes32((hookType));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 0);
-    return (Bytes.slice4(_blob, 0));
+    return (address(Bytes.slice20(_blob, 0)));
   }
 
-  /** Get selector (using the specified store) */
-  function get(IStore _store, bytes32 entityType, bytes32 hookType) internal view returns (bytes4 selector) {
+  /** Get value (using the specified store) */
+  function get(IStore _store, bytes32 entityType, bytes32 hookType) internal view returns (address value) {
     bytes32[] memory _keyTuple = new bytes32[](2);
     _keyTuple[0] = bytes32((entityType));
     _keyTuple[1] = bytes32((hookType));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 0);
-    return (Bytes.slice4(_blob, 0));
+    return (address(Bytes.slice20(_blob, 0)));
   }
 
-  /** Set selector */
-  function set(bytes32 entityType, bytes32 hookType, bytes4 selector) internal {
+  /** Set value */
+  function set(bytes32 entityType, bytes32 hookType, address value) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
     _keyTuple[0] = bytes32((entityType));
     _keyTuple[1] = bytes32((hookType));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((selector)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
   }
 
-  /** Set selector (using the specified store) */
-  function set(IStore _store, bytes32 entityType, bytes32 hookType, bytes4 selector) internal {
+  /** Set value (using the specified store) */
+  function set(IStore _store, bytes32 entityType, bytes32 hookType, address value) internal {
     bytes32[] memory _keyTuple = new bytes32[](2);
     _keyTuple[0] = bytes32((entityType));
     _keyTuple[1] = bytes32((hookType));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((selector)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(bytes4 selector) internal view returns (bytes memory) {
-    return abi.encodePacked(selector);
+  function encode(address value) internal view returns (bytes memory) {
+    return abi.encodePacked(value);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

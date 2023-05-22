@@ -2,13 +2,14 @@ Hook Callstack:
 
 ```mermaid
 graph TD;
-  c[Client] -.-> w[World]
-  w --> s[Native Systems]
-  w --> ts[Entity Trigger System]
-  s --> ss[Physics Subsystems]
-  ss --> h[Type Hook/Mod Subsystems]
-  ts --> h
-  h --> ss
+  c{Client} -.-> w[World]
+  w --> s[Move/Attack/etc. Systems]
+  s --> ps[Physics Subsystems]
+  ps --trigger hook--> php[Permissioned\nProxy Subsystem]
+  php --delegatecall--> h[Hook Handler\nImplementation System]
+  w --> ets[Entity Trigger System]
+  ets --> php
+  h --> ps
 ```
 
 Entities have:
@@ -16,6 +17,12 @@ Entities have:
 - stats
 - actions
 - reactions
+
+# Access Control
+
+All mods inherit the access control of the `Permissioned Proxy Subsystem`, which is restricted to only the `Physics Subsystems`. This means mods are bound by the physics of the world defined in the `Physics Subsystems`.
+
+All mods are implemented as unregistered systems that are `delegatecall`ed by the `Permissioned Proxy Subsystem` to enforce access control.
 
 # Mods
 

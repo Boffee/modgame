@@ -14,6 +14,11 @@ export default mudConfig({
       openAccess: false,
       accessList: [],
     },
+    // TODO: deploy in a separate namespace to enforce access control
+    HookHandlerProxySubSystem: {
+      openAccess: false,
+      accessList: [],
+    },
   },
   tables: {
     Token: "bytes32",
@@ -31,14 +36,12 @@ export default mudConfig({
         cooldown: "uint32",
       },
     },
-    Hook: {
+    HookHandler: {
       keySchema: {
         entityType: "bytes32",
         hookType: "bytes32",
       },
-      schema: {
-        selector: "bytes4",
-      },
+      schema: "address",
     },
     AttackStat: {
       schema: {

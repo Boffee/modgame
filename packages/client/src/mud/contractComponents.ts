@@ -111,12 +111,12 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    Hook: (() => {
-      const tableId = new TableId("", "Hook");
+    HookHandler: (() => {
+      const tableId = new TableId("", "HookHandler");
       return defineComponent(
         world,
         {
-          selector: RecsType.String,
+          value: RecsType.String,
         },
         {
           metadata: {
