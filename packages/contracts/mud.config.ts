@@ -10,6 +10,10 @@ export default mudConfig({
       openAccess: false,
       accessList: [],
     },
+    AttributesSubSystem: {
+      openAccess: false,
+      accessList: [],
+    },
   },
   tables: {
     Token: "bytes32",
@@ -88,6 +92,11 @@ export default mudConfig({
       name: "KeysWithValueModule",
       root: true,
       args: [resolveTableId("Position")],
+    },
+    {
+      name: "UniqueEntityModule",
+      root: true,
+      args: [],
     },
   ],
 });

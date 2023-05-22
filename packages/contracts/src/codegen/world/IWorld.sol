@@ -6,6 +6,7 @@ pragma solidity >=0.8.0;
 import { IBaseWorld } from "@latticexyz/world/src/interfaces/IBaseWorld.sol";
 
 import { IAttackSubSystem } from "./IAttackSubSystem.sol";
+import { IAttributesSubSystem } from "./IAttributesSubSystem.sol";
 import { IAuthedCooldownSystem } from "./IAuthedCooldownSystem.sol";
 import { IAuthedSystem } from "./IAuthedSystem.sol";
 import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
@@ -21,6 +22,7 @@ import { ISpawnSystem } from "./ISpawnSystem.sol";
 interface IWorld is
   IBaseWorld,
   IAttackSubSystem,
+  IAttributesSubSystem,
   IAuthedCooldownSystem,
   IAuthedSystem,
   ICommitMoveSystem,
