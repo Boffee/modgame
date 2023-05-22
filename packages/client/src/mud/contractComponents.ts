@@ -50,6 +50,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    Orientation: (() => {
+      const tableId = new TableId("", "Orientation");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     MoveStat: (() => {
       const tableId = new TableId("", "MoveStat");
       return defineComponent(

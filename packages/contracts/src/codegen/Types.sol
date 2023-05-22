@@ -6,3 +6,10 @@ enum PositionLevel {
   Underground,
   Surface
 }
+
+enum OrientationType {
+  North,
+  East,
+  South,
+  West
+}

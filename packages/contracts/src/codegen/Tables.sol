@@ -6,6 +6,7 @@ pragma solidity >=0.8.0;
 import { Token, TokenTableId } from "./tables/Token.sol";
 import { Id, IdTableId } from "./tables/Id.sol";
 import { Type, TypeTableId } from "./tables/Type.sol";
+import { Orientation, OrientationTableId } from "./tables/Orientation.sol";
 import { MoveStat, MoveStatData, MoveStatTableId } from "./tables/MoveStat.sol";
 import { Hook, HookTableId } from "./tables/Hook.sol";
 import { AttackStat, AttackStatData, AttackStatTableId } from "./tables/AttackStat.sol";

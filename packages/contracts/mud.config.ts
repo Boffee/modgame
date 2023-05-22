@@ -15,6 +15,7 @@ export default mudConfig({
     Token: "bytes32",
     Id: "uint256",
     Type: "bytes32",
+    Orientation: "OrientationType",
     MoveStat: {
       schema: {
         maxDistance: "uint32",
@@ -80,6 +81,7 @@ export default mudConfig({
   },
   enums: {
     PositionLevel: ["Underground", "Surface"],
+    OrientationType: ["North", "East", "South", "West"],
   },
   modules: [
     {
