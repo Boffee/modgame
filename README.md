@@ -1,3 +1,9 @@
+# Mod Game
+
+Mod Game is a fully on-chain looter shooter extraction game with a twist: all items in the game are permissionlessly created by the players, all in a single persistent world.
+
+Mod Game is a game with a goal, but it is also a sandbox of a sandbox. Anyone can create new game mechanics, combine the mechanics to create new items, and combine items to create new experiences, bound only by the physics of the world (and the gas limits 😅).
+
 # Architecture
 
 ```mermaid
@@ -10,7 +16,7 @@ graph TD;
   h --interact with phsyics--> ps
 ```
 
-# Actions
+# Actions (Physics)
 
 Actions (and their reactions) define how entities interaction with each other in the world. Actions restrict what entities can and can't do in the world, commonly known as the physics of the world.
 
@@ -21,9 +27,9 @@ The set of actions that can be performed by any entity in the game are:
 - trigger
 - create new entity types
 
-# Hooks
+# Hooks (Mechanics)
 
-Hooks allow entities to ON_TRIGGER additional actions before, during, or after an action is performed. Players can create mods with infinite complexity by creating and combining hooks.
+Hooks allow entities to call additional actions before, during, or after an action is performed. Players can create mods with infinite complexity by creating and combining hooks.
 
 Currently, Mod Game supports the following hooks:
 
@@ -37,7 +43,7 @@ Currently, Mod Game supports the following hooks:
 - Trigger Hooks:
   - **onTrigger**: called when an entity triggers another entity
 
-# Mods
+# Mods (Items)
 
 Players create mods by:
 
