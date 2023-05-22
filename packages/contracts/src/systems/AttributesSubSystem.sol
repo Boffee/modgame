@@ -9,20 +9,40 @@ import {MoveStat, MoveStatData} from "../codegen/tables/MoveStat.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 
 contract AttributesSubSystem is System {
+  /**
+   * @notice Define a new type of entity
+   * @dev type cannot be redefined
+   * @param owner the owner of the type
+   * @param attackDist maximum attack distance
+   * @param attackCD attack cooldown
+   * @param moveDist maximum move distance
+   * @param moveCD move cooldown
+   * @return entity the new type
+   */
   function _defineType(
     address owner,
     uint32 attackDist,
     uint32 attackCD,
     uint32 moveDist,
     uint32 moveCD
-  ) external returns (bytes32 entity) {
-    entity = getUniqueEntity();
+  ) public returns (bytes32 entity) {
+    entity = _createType(owner);
     AttackStat.set(
       entity, AttackStatData({maxDistance: attackDist, cooldown: attackCD})
     );
     MoveStat.set(
       entity, MoveStatData({maxDistance: moveDist, cooldown: moveCD})
     );
+  }
+
+  /**
+   * @notice Create a new entity with no attributes
+   * @dev cannot define type after calling _createType
+   * @param owner the owner of the entity
+   * @return entity the new entity
+   */
+  function _createType(address owner) public returns (bytes32 entity) {
+    entity = getUniqueEntity();
     Owner.set(entity, owner);
   }
 }

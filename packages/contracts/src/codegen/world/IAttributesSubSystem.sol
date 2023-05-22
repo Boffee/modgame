@@ -11,4 +11,6 @@ interface IAttributesSubSystem {
     uint32 moveDist,
     uint32 moveCD
   ) external returns (bytes32 entity);
+
+  function _createType(address owner) external returns (bytes32 entity);
 }
