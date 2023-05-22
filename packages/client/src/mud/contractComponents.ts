@@ -50,8 +50,8 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    IsMod: (() => {
-      const tableId = new TableId("", "IsMod");
+    Immutable: (() => {
+      const tableId = new TableId("", "Immutable");
       return defineComponent(
         world,
         {

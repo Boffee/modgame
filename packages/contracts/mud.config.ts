@@ -19,7 +19,7 @@ export default mudConfig({
     Token: "bytes32",
     Id: "uint256",
     Type: "bytes32",
-    IsMod: "bool",
+    Immutable: "bool",
     ModList: {
       keySchema: {},
       schema: "bytes32[]",
