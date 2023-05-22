@@ -23,20 +23,26 @@ import {PLAYER_TOKEN} from "../constants.sol";
 contract AttackSubSystem is EntityHookSystem {
   using TypeLib for bytes32;
 
-  function _attack(bytes32 source, bytes32 target) external {
+  function _attack(bytes32 source, bytes32 target) public {
     bool isPredator = Predation.get(source, target);
     bool isPrey = Predation.get(target, source);
     if (isPredator && !isPrey) {
-      _kill(target);
+      _kill(source, target);
     } else if (isPrey && !isPredator) {
-      _kill(source);
+      _kill(target, source);
     } else {
-      _kill(target);
-      _kill(source);
+      _die(target);
+      _die(source);
     }
   }
 
-  function _kill(bytes32 entity) internal {
+  function _kill(bytes32 source, bytes32 target) public {
+    _verifyPosition(source, target);
+    _die(target);
+    // TODO: handle item pickup
+  }
+
+  function _die(bytes32 entity) internal {
     // TODO: handle item drops
     _remove(entity);
   }

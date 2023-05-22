@@ -5,4 +5,6 @@ pragma solidity >=0.8.0;
 
 interface IAttackSubSystem {
   function _attack(bytes32 source, bytes32 target) external;
+
+  function _kill(bytes32 source, bytes32 target) external;
 }
