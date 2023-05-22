@@ -17,6 +17,7 @@ import { IMoveSystem } from "./IMoveSystem.sol";
 import { IRegisterHookHandlerSystem } from "./IRegisterHookHandlerSystem.sol";
 import { IRegisterModSystem } from "./IRegisterModSystem.sol";
 import { ISpawnSystem } from "./ISpawnSystem.sol";
+import { ITriggerSystem } from "./ITriggerSystem.sol";
 
 /**
  * The IWorld interface includes all systems dynamically added to the World
@@ -35,7 +36,8 @@ interface IWorld is
   IMoveSystem,
   IRegisterHookHandlerSystem,
   IRegisterModSystem,
-  ISpawnSystem
+  ISpawnSystem,
+  ITriggerSystem
 {
 
 }
