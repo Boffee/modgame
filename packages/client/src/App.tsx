@@ -3,23 +3,21 @@ import { useMUD } from "./MUDContext";
 
 export const App = () => {
   const {
-    components: { Counter },
-    systemCalls: { increment },
+    components: { Position },
+    systemCalls: { move },
     network: { singletonEntity },
   } = useMUD();
 
-  const counter = useComponentValue(Counter, singletonEntity);
+  const counter = useComponentValue(Position, singletonEntity);
 
   return (
     <>
-      <div>
-        Counter: <span>{counter?.value ?? "??"}</span>
-      </div>
+      <div></div>
       <button
         type="button"
         onClick={async (event) => {
           event.preventDefault();
-          console.log("new counter value:", await increment());
+          console.log("new counter value:", await move());
         }}
       >
         Increment

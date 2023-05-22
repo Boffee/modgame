@@ -4,11 +4,17 @@ pragma solidity >=0.8.0;
 import {Balance} from "../codegen/tables/Balance.sol";
 import {TotalSupply} from "../codegen/tables/TotalSupply.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
+import {Token} from "../codegen/tables/Token.sol";
+import {Id} from "../codegen/tables/Id.sol";
 import {TypeCast} from "../libraries/TypeCast.sol";
 
 library ERC721Logic {
   using TypeCast for bytes32;
   using TypeCast for address;
+
+  function _mint(address to, bytes32 token) internal {
+    _mint(token, to, TotalSupply.get(token));
+  }
 
   /**
    * @dev Mints `tokenId` to `to`
@@ -25,6 +31,8 @@ library ERC721Logic {
 
     Balance.set(token, _to, Balance.get(token, _to) + 1);
     TotalSupply.set(token, TotalSupply.get(token) + 1);
+    Token.set(entity, token);
+    Id.set(entity, tokenId);
 
     Owner.set(token, to);
   }

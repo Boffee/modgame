@@ -6,10 +6,14 @@ export default mudConfig({
       openAccess: false,
       accessList: [],
     },
+    AttackSubSystem: {
+      openAccess: false,
+      accessList: [],
+    },
   },
   tables: {
+    Token: "bytes32",
     Id: "uint256",
-    Counter: "uint256",
     Type: "bytes32",
     MoveStat: {
       schema: {

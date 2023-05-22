@@ -1,21 +1,26 @@
-import { getComponentValue } from "@latticexyz/recs";
 import { awaitStreamValue } from "@latticexyz/utils";
-import { ClientComponents } from "./createClientComponents";
+import { BytesLike } from "ethers";
 import { SetupNetworkResult } from "./setupNetwork";
 
 export type SystemCalls = ReturnType<typeof createSystemCalls>;
 
-export function createSystemCalls(
-  { worldSend, txReduced$, singletonEntity }: SetupNetworkResult,
-  { Counter }: ClientComponents
-) {
-  const increment = async () => {
-    const tx = await worldSend("increment", []);
+export function createSystemCalls({
+  worldSend,
+  txReduced$,
+  singletonEntity,
+}: SetupNetworkResult) {
+  const spawn = async () => {
+    const tx = await worldSend("spawn", []);
     await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
-    return getComponentValue(Counter, singletonEntity);
+  };
+
+  const move = async (entity: BytesLike, x: number, y: number) => {
+    const tx = await worldSend("move", [entity, x, y]);
+    await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
   };
 
   return {
-    increment,
+    spawn,
+    move,
   };
 }
