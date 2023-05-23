@@ -43,8 +43,7 @@ contract MoveSubSystem is EntityHookSystem {
       )
     );
 
-    Position.setX(entity, x);
-    Position.setY(entity, y);
+    Position.set(entity, x, y);
 
     _callHooks(
       ON_ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
@@ -92,7 +91,6 @@ contract MoveSubSystem is EntityHookSystem {
       _callHooks(ON_ENTER, entity, targetEntities);
     }
 
-    Position.setX(entity, x);
-    Position.setY(entity, y);
+    Position.set(entity, x, y);
   }
 }

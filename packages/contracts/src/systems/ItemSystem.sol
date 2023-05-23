@@ -29,8 +29,7 @@ contract ItemSystem is AuthedSystem {
   ) external onlyApproved(owner) {
     require(PositionLib.withinDistance(owner, x, y, 1), "too far away");
     ERC721Logic._transfer(entity, owner, NULL);
-    Position.setX(entity, x);
-    Position.setY(entity, y);
+    Position.set(entity, x, y);
     Orientation.set(entity, orientation);
   }
 
