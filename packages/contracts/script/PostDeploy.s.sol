@@ -42,6 +42,10 @@ contract PostDeploy is Script {
     Predation.set(world, RED, GREEN, true);
     Predation.set(world, GREEN, BLUE, true);
     Predation.set(world, BLUE, RED, true);
+    ImageUri.set(world, RED, unicode"🔴");
+    ImageUri.set(world, GREEN, unicode"🟢");
+    ImageUri.set(world, BLUE, unicode"🔵");
+    ImageUri.set(world, GOLD_TOKEN, unicode"💰");
 
     // deploy and register hook handlers
     // move

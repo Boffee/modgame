@@ -52,7 +52,7 @@ library ItemSpawnLogic {
   {
     int256 rng = int256(random(seed));
     x = int128(rng % 1000 - 500);
-    y = int128(rng / 1000 - 500);
+    y = int128((rng / 1000) % 1000 - 500);
   }
 
   function sampleItemType(uint256 seed) internal view returns (bytes32) {

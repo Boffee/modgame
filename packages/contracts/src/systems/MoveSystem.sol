@@ -85,11 +85,8 @@ contract MoveSystem is AuthedSystem, CooldownSystem {
   }
 
   function _verifyPosition(bytes32 entity, int128 x, int128 y) internal view {
-    require(
-      PositionLib.withinDistance(
-        entity, x, y, MoveStat.getMaxDistance(TypeLib.get(entity))
-      ),
-      "Move distance too far"
-    );
+    uint256 distance = PositionLib.distance(entity, x, y);
+    require(distance <= 10, "Move distance too far");
+    require(distance > 0, "Already at position");
   }
 }

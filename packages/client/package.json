@@ -25,10 +25,12 @@
     "@wagmi/chains": "^0.2.22",
     "contracts": "workspace:*",
     "ethers": "^5.7.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.194",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^3.1.0",
