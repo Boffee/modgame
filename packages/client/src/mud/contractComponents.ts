@@ -50,6 +50,36 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    Name: (() => {
+      const tableId = new TableId("", "Name");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Description: (() => {
+      const tableId = new TableId("", "Description");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Immutable: (() => {
       const tableId = new TableId("", "Immutable");
       return defineComponent(

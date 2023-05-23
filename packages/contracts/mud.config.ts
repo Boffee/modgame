@@ -35,6 +35,8 @@ export default mudConfig({
     Token: "bytes32",
     Id: "uint256",
     Type: "bytes32",
+    Name: "string",
+    Description: "string",
     Immutable: "bool",
     Collected: "bool",
     ModList: {
