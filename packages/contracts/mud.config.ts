@@ -14,6 +14,10 @@ export default mudConfig({
       openAccess: false,
       accessList: [],
     },
+    TriggerSubSystem: {
+      openAccess: false,
+      accessList: [],
+    },
     // TODO: deploy in a separate namespace to enforce access control
     HookHandlerProxySubSystem: {
       openAccess: false,
