@@ -9,6 +9,8 @@ import {IWorld} from "../src/codegen/world/IWorld.sol";
 import "../src/codegen/Tables.sol";
 import "../src/constants.sol";
 
+import "../src/reactions/MoveReaction.sol";
+
 contract PostDeploy is Script {
   function run(address worldAddress) external {
     // Load the private key from the `PRIVATE_KEY` environment variable (in .env)
@@ -32,5 +34,7 @@ contract PostDeploy is Script {
     AttackStat.set(world, DUMMY, AttackStatData({maxDistance: 1, cooldown: 5}));
 
     vm.stopBroadcast();
+
+    // deploy and register hook handlers
   }
 }

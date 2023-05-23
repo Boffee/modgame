@@ -54,6 +54,7 @@ export default mudConfig({
         cooldown: "uint32",
       },
     },
+    HookHandlerRegistry: "address",
     HookHandler: {
       keySchema: {
         entityType: "bytes32",

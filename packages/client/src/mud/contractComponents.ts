@@ -126,8 +126,24 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    HookHandler: (() => {
-      const tableId = new TableId("", "HookHandler");
+    AttackStat: (() => {
+      const tableId = new TableId("", "AttackStat");
+      return defineComponent(
+        world,
+        {
+          maxDistance: RecsType.Number,
+          cooldown: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    HookHandlerRegistry: (() => {
+      const tableId = new TableId("", "HookHandlerRegis");
       return defineComponent(
         world,
         {
@@ -141,13 +157,12 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    AttackStat: (() => {
-      const tableId = new TableId("", "AttackStat");
+    HookHandler: (() => {
+      const tableId = new TableId("", "HookHandler");
       return defineComponent(
         world,
         {
-          maxDistance: RecsType.Number,
-          cooldown: RecsType.Number,
+          value: RecsType.String,
         },
         {
           metadata: {
