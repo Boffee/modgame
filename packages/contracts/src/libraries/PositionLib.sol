@@ -210,4 +210,12 @@ library PositionExtension {
   {
     return (self.x - x).abs() + (self.y - y).abs();
   }
+
+  function entities(PositionData memory self)
+    internal
+    view
+    returns (bytes32[] memory)
+  {
+    return getKeysWithValue(PositionTableId, Position.encode(self.x, self.y));
+  }
 }
