@@ -12,7 +12,7 @@ import {
 } from "../codegen/tables/Position.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {ON_ENTER, ON_LEAVE} from "../constants.sol";
-import {EntityHookSystem} from "./EntityHookSystem.sol";
+import {EntityHookSystem} from "../extensions/EntityHookSystem.sol";
 
 /**
  * @notice A system that allows an entity to move

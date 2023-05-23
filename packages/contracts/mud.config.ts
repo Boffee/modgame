@@ -20,7 +20,12 @@ export default mudConfig({
       accessList: [],
     },
   },
-  excludeSystems: ["AuthedSystem", "CooldownSystem", "MutableSystem"],
+  excludeSystems: [
+    "AuthedSystem",
+    "CooldownSystem",
+    "MutableSystem",
+    "EntityHookSystem",
+  ],
   tables: {
     Token: "bytes32",
     Id: "uint256",

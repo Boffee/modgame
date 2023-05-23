@@ -16,7 +16,7 @@ import {Token} from "../codegen/tables/Token.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
-import {EntityHookSystem} from "./EntityHookSystem.sol";
+import {EntityHookSystem} from "../extensions/EntityHookSystem.sol";
 import {ON_ATTACK, ON_HIT, ON_KILL, PLAYER_TOKEN} from "../constants.sol";
 
 contract AttackSubSystem is EntityHookSystem {
