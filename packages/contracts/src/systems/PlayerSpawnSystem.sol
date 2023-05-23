@@ -7,7 +7,7 @@ import {PLAYER_TOKEN} from "../constants.sol";
 import {TypeCast} from "../libraries/TypeCast.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
 
-contract SpawnSystem is System {
+contract PlayerSpawnSystem is System {
   using TypeCast for address;
 
   function spawn() external {

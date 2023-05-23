@@ -14,7 +14,7 @@ import { IAttackSystem } from "./IAttackSystem.sol";
 import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IModSystem } from "./IModSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
-import { ISpawnSystem } from "./ISpawnSystem.sol";
+import { IPlayerSpawnSystem } from "./IPlayerSpawnSystem.sol";
 import { ITriggerSystem } from "./ITriggerSystem.sol";
 
 /**
@@ -32,7 +32,7 @@ interface IWorld is
   ICommitMoveSystem,
   IModSystem,
   IMoveSystem,
-  ISpawnSystem,
+  IPlayerSpawnSystem,
   ITriggerSystem
 {
 
