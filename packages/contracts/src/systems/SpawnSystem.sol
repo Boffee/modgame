@@ -16,6 +16,6 @@ contract SpawnSystem is System {
       "already playing"
     );
 
-    ERC721Logic._mint(_msgSender(), PLAYER_TOKEN);
+    ERC721Logic._mint(PLAYER_TOKEN, _msgSender());
   }
 }

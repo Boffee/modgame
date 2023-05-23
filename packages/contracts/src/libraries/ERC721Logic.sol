@@ -12,12 +12,14 @@ library ERC721Logic {
   using TypeCast for bytes32;
   using TypeCast for address;
 
-  function _mint(address to, bytes32 token) internal {
-    _mint(token, to.toBytes32(), TotalSupply.get(token));
+  function _mint(bytes32 token, address to) internal returns (uint256 tokenId) {
+    tokenId = TotalSupply.get(token);
+    _mint(token, to.toBytes32(), tokenId);
   }
 
-  function _mint(bytes32 to, bytes32 token) internal {
-    _mint(token, to, TotalSupply.get(token));
+  function _mint(bytes32 token, bytes32 to) internal returns (uint256 tokenId) {
+    tokenId = TotalSupply.get(token);
+    _mint(token, to, tokenId);
   }
 
   /**
@@ -28,7 +30,7 @@ library ERC721Logic {
    */
   function _mint(bytes32 token, bytes32 to, uint256 tokenId) internal {
     require(to != bytes32(0), "ERC721: mint to the zero entity");
-    bytes32 entity = token.toBytes32(tokenId);
+    bytes32 entity = toEntity(token, tokenId);
     require(!_exists(entity), "ERC721: token already minted");
 
     Balance.set(token, to, Balance.get(token, to) + 1);
@@ -37,6 +39,10 @@ library ERC721Logic {
     Id.set(entity, tokenId);
 
     Owner.set(token, to);
+  }
+
+  function _transfer(bytes32 entity, bytes32 from, bytes32 to) internal {
+    _transfer(Token.get(entity), from, to, Id.get(entity));
   }
 
   /**
@@ -49,7 +55,7 @@ library ERC721Logic {
   function _transfer(bytes32 token, bytes32 from, bytes32 to, uint256 tokenId)
     internal
   {
-    bytes32 entity = token.toBytes32(tokenId);
+    bytes32 entity = toEntity(token, tokenId);
 
     require(_ownerOf(entity) == from, "ERC721: transfer from incorrect owner");
     require(to != bytes32(0), "ERC721: transfer to the zero entity");
@@ -63,13 +69,17 @@ library ERC721Logic {
     Owner.set(token, to);
   }
 
+  function _burn(bytes32 entity) internal {
+    _burn(Token.get(entity), Id.get(entity));
+  }
+
   /**
    * @dev Burns `tokenId`
    * @param token token to burn
    * @param tokenId token id to burn
    */
   function _burn(bytes32 token, uint256 tokenId) internal {
-    bytes32 entity = token.toBytes32(tokenId);
+    bytes32 entity = toEntity(token, tokenId);
     bytes32 owner = _ownerOf(entity);
 
     // TODO: clear approvals once implemented
@@ -86,5 +96,13 @@ library ERC721Logic {
 
   function _ownerOf(bytes32 entity) internal view returns (bytes32) {
     return Owner.get(entity);
+  }
+
+  function toEntity(bytes32 token, uint256 tokenId)
+    internal
+    pure
+    returns (bytes32)
+  {
+    return token.toBytes32(tokenId);
   }
 }
