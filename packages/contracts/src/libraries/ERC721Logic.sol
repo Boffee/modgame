@@ -13,6 +13,10 @@ library ERC721Logic {
   using TypeCast for address;
 
   function _mint(address to, bytes32 token) internal {
+    _mint(token, to.toBytes32(), TotalSupply.get(token));
+  }
+
+  function _mint(bytes32 to, bytes32 token) internal {
     _mint(token, to, TotalSupply.get(token));
   }
 
@@ -22,14 +26,12 @@ library ERC721Logic {
    * @param to entity to mint token to
    * @param tokenId token id to mint
    */
-  function _mint(bytes32 token, address to, uint256 tokenId) internal {
-    require(to != address(0), "ERC721: mint to the zero entity");
+  function _mint(bytes32 token, bytes32 to, uint256 tokenId) internal {
+    require(to != bytes32(0), "ERC721: mint to the zero entity");
     bytes32 entity = token.toBytes32(tokenId);
     require(!_exists(entity), "ERC721: token already minted");
 
-    bytes32 _to = to.toBytes32();
-
-    Balance.set(token, _to, Balance.get(token, _to) + 1);
+    Balance.set(token, to, Balance.get(token, to) + 1);
     TotalSupply.set(token, TotalSupply.get(token) + 1);
     Token.set(entity, token);
     Id.set(entity, tokenId);
@@ -44,22 +46,19 @@ library ERC721Logic {
    * @param to entity to transfer token to
    * @param tokenId token id to transfer
    */
-  function _transfer(bytes32 token, address from, address to, uint256 tokenId)
+  function _transfer(bytes32 token, bytes32 from, bytes32 to, uint256 tokenId)
     internal
   {
     bytes32 entity = token.toBytes32(tokenId);
 
     require(_ownerOf(entity) == from, "ERC721: transfer from incorrect owner");
-    require(to != address(0), "ERC721: transfer to the zero address");
+    require(to != bytes32(0), "ERC721: transfer to the zero entity");
     require(Owner.get(token) == from, "ERC721: transfer from incorrect owner");
 
     // TODO: clear approval once implemented
 
-    bytes32 _from = from.toBytes32();
-    bytes32 _to = to.toBytes32();
-
-    Balance.set(token, _from, Balance.get(token, _from) - 1);
-    Balance.set(token, _to, Balance.get(token, _to) + 1);
+    Balance.set(token, from, Balance.get(token, from) - 1);
+    Balance.set(token, to, Balance.get(token, to) + 1);
 
     Owner.set(token, to);
   }
@@ -71,22 +70,21 @@ library ERC721Logic {
    */
   function _burn(bytes32 token, uint256 tokenId) internal {
     bytes32 entity = token.toBytes32(tokenId);
-    address owner = _ownerOf(entity);
-    bytes32 _owner = owner.toBytes32();
+    bytes32 owner = _ownerOf(entity);
 
     // TODO: clear approvals once implemented
 
-    Balance.set(token, _owner, Balance.get(token, _owner) - 1);
+    Balance.set(token, owner, Balance.get(token, owner) - 1);
     TotalSupply.set(token, TotalSupply.get(token) - 1);
 
     Owner.deleteRecord(token);
   }
 
   function _exists(bytes32 entity) internal view returns (bool) {
-    return _ownerOf(entity) != address(0);
+    return _ownerOf(entity) != bytes32(0);
   }
 
-  function _ownerOf(bytes32 entity) internal view returns (address) {
+  function _ownerOf(bytes32 entity) internal view returns (bytes32) {
     return Owner.get(entity);
   }
 }

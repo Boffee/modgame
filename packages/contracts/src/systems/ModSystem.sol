@@ -3,7 +3,6 @@ pragma solidity >=0.8.0;
 
 import {Immutable} from "../codegen/tables/Immutable.sol";
 import {ModList} from "../codegen/tables/ModList.sol";
-import {Owner} from "../codegen/tables/Owner.sol";
 import {HookHandler} from "../codegen/tables/HookHandler.sol";
 import {ModList} from "../codegen/tables/ModList.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";

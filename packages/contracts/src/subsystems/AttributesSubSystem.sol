@@ -8,8 +8,11 @@ import {MoveStat, MoveStatData} from "../codegen/tables/MoveStat.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {Immutable} from "../codegen/tables/Immutable.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";
+import {TypeCast} from "../libraries/TypeCast.sol";
 
 contract AttributesSubSystem is AuthedSystem {
+  using TypeCast for address;
+
   /**
    * @notice Create a new type and define its attributes
    * @param owner the owner of the type
@@ -61,7 +64,7 @@ contract AttributesSubSystem is AuthedSystem {
    * @param type_ the type entity
    */
   function _createType(address owner, bytes32 type_) public {
-    require(Owner.get(type_) == address(0), "Type already defined");
-    Owner.set(type_, owner);
+    require(Owner.get(type_) == bytes32(0), "Type already defined");
+    Owner.set(type_, owner.toBytes32());
   }
 }

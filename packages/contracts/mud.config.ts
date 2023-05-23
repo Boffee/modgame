@@ -82,7 +82,7 @@ export default mudConfig({
       schema: "uint256",
     },
     TotalSupply: "uint256",
-    Owner: "address",
+    Owner: "bytes32",
     Metdata: {
       schema: {
         createdAt: "uint40",

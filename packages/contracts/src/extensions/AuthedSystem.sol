@@ -3,12 +3,15 @@ pragma solidity >=0.8.0;
 
 import {System} from "@latticexyz/world/src/System.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
+import {TypeCast} from "../libraries/TypeCast.sol";
 
 /**
  * @notice A system that requires the sender to be the owner of the entity or
  * approved to perform an action on the entity.
  */
 contract AuthedSystem is System {
+  using TypeCast for address;
+
   /**
    * @notice Checks if the sender is the owner of the entity
    * @param entity The entity to check
@@ -33,7 +36,7 @@ contract AuthedSystem is System {
    * @return True if the sender is the owner of the entity, false otherwise
    */
   function _isOwner(bytes32 entity) internal view returns (bool) {
-    return Owner.get(entity) == msg.sender;
+    return Owner.get(entity) == _msgSender().toBytes32();
   }
 
   /**
