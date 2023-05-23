@@ -53,7 +53,8 @@ contract MoveSubSystem is EntityHookSystem {
 
   function _turnRelative(bytes32 entity, DirectionType direction) public {
     Orientation.set(
-      entity, OrientationType(uint8(Orientation.get(entity)) + uint8(direction))
+      entity,
+      OrientationType((uint8(Orientation.get(entity)) + uint8(direction)) % 4)
     );
   }
 
