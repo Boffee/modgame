@@ -12,6 +12,7 @@ import "../src/reactions/MoveReaction.sol";
 import "../src/reactions/TriggerReaction.sol";
 import "../src/reactions/KillReaction.sol";
 import "../src/reactions/AttackReaction.sol";
+import "../src/libraries/ItemSpawnLogic.sol";
 
 contract PostDeploy is Script {
   function run(address worldAddress) external {
@@ -86,6 +87,7 @@ contract PostDeploy is Script {
     world.registerHookHandler("moveRandomT", address(new MoveRandomT()));
 
     // kill
+    world.registerHookHandler("killS", address(new KillS()));
     world.registerHookHandler("killForward1S", address(new KillForward1S()));
     world.registerHookHandler("killForward2S", address(new KillForward2S()));
     world.registerHookHandler("killForward3S", address(new KillForward3S()));
@@ -249,6 +251,93 @@ contract PostDeploy is Script {
     world.registerHookHandler("triggerLeft4T", address(new TriggerLeft4T()));
     world.registerHookHandler("triggerRandomT", address(new TriggerRandomT()));
     world.registerHookHandler("triggerWithin1T", address(new TriggerWithin1T()));
+
+    world.createAndDefineType(
+      DOGE,
+      1,
+      1,
+      1,
+      1,
+      "Doge",
+      "A Doge that move away when you walk next to it",
+      unicode"🐶"
+    );
+    world.configureHookHandler(ON_ENTER, DOGE, "moveRandomT");
+    world.registerMod(DOGE);
+
+    world.createAndDefineType(
+      CAT,
+      1,
+      1,
+      1,
+      1,
+      "CAT",
+      "A CAT that moves foward by 2 when you walk next to it",
+      unicode"😻"
+    );
+    world.configureHookHandler(ON_ENTER, CAT, "moveBackward2T");
+    world.registerMod(CAT);
+
+    world.createAndDefineType(
+      BEAR,
+      1,
+      1,
+      1,
+      1,
+      "Bear",
+      "A Bear that kills anything that walks next to it",
+      unicode"🐻"
+    );
+    world.configureHookHandler(ON_ENTER, BEAR, "killS");
+    world.registerMod(BEAR);
+
+    world.createAndDefineType(
+      CONVEYER,
+      1,
+      1,
+      1,
+      1,
+      "Conveyer",
+      "A conveyer belt that move anything that steps on it forward 1 tile",
+      unicode"⬜️"
+    );
+    world.configureHookHandler(ON_ENTER, CONVEYER, "moveForward1S");
+    world.registerMod(CONVEYER);
+
+    bytes32 entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, 0, 0);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, 0, 1);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, 0, 2);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, 0, 3);
+    Orientation.set(world, entity, OrientationType.West);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, 1, 3);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, -1, 3);
+    entity = world.mintItem(CONVEYER);
+    Position.set(world, entity, -2, 3);
+
+    entity = world.mintItem(BEAR);
+    Position.set(world, entity, 4, 3);
+    entity = world.mintItem(BEAR);
+    Position.set(world, entity, 2, 5);
+
+    entity = world.mintItem(DOGE);
+    Position.set(world, entity, -4, 3);
+    entity = world.mintItem(DOGE);
+    Position.set(world, entity, -9, -5);
+
+    entity = world.mintItem(CAT);
+    Position.set(world, entity, 10, 3);
+    entity = world.mintItem(CAT);
+    Position.set(world, entity, -11, -2);
+    entity = world.mintItem(CAT);
+    Position.set(world, entity, 2, 9);
+    entity = world.mintItem(CAT);
+    Position.set(world, entity, 0, -2);
 
     vm.stopBroadcast();
   }

@@ -28,6 +28,14 @@ contract ModSystem is AuthedSystem, MutableSystem {
     HookHandler.set(hookType, entityType, handler);
   }
 
+  function configureHookHandler(
+    bytes32 hookType,
+    bytes32 entityType,
+    bytes32 hookName
+  ) external onlyApproved(entityType) onlyMutable(entityType) {
+    HookHandler.set(hookType, entityType, HookHandlerRegistry.get(hookName));
+  }
+
   function createAndDefineType(
     bytes32 type_,
     uint32 attackDist,

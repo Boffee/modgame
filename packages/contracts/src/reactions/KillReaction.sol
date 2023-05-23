@@ -27,6 +27,12 @@ abstract contract KillBase is BaseReaction {
   }
 }
 
+contract KillS is KillBase {
+  function execute(bytes32 source, bytes32 target) external {
+    _physics()._kill(target, source);
+  }
+}
+
 contract KillForward1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 1);

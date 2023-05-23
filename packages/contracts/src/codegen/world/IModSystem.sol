@@ -8,6 +8,8 @@ interface IModSystem {
 
   function configureHookHandler(bytes32 hookType, bytes32 entityType, address handler) external;
 
+  function configureHookHandler(bytes32 hookType, bytes32 entityType, bytes32 hookName) external;
+
   function createAndDefineType(
     bytes32 type_,
     uint32 attackDist,

@@ -5,9 +5,14 @@ import {Balance} from "../codegen/tables/Balance.sol";
 import {GoldSpawnLogic} from "../libraries/GoldSpawnLogic.sol";
 import {ItemSpawnLogic} from "../libraries/ItemSpawnLogic.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";
-import {ITEM_TOKEN} from "../constants.sol";
+import {ITEM_TOKEN, NULL} from "../constants.sol";
 
 contract CollectSystem is AuthedSystem {
+  // TODO: remove
+  function mintItem(bytes32 itemType) external returns (bytes32) {
+    return ItemSpawnLogic.mintItem(itemType, NULL);
+  }
+
   function collectGold(uint256[] memory seedBlockNumbers, bytes32 to)
     external
     onlyApproved(to)

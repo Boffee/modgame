@@ -20,3 +20,9 @@ bytes32 constant ON_KILL = bytes32("ON_KILL");
 bytes32 constant RED = bytes32("RED");
 bytes32 constant GREEN = bytes32("GREEN");
 bytes32 constant BLUE = bytes32("BLUE");
+
+bytes32 constant DOGE = bytes32("DOGE");
+bytes32 constant CAT = bytes32("CAT");
+bytes32 constant BEAR = bytes32("BEAR");
+bytes32 constant CONVEYER = bytes32("CONVEYER");
+bytes32 constant WALL = bytes32("WALL");
