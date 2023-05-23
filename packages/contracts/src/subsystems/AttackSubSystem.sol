@@ -55,7 +55,7 @@ contract AttackSubSystem is EntityHookSystem {
   }
 
   function _remove(bytes32 entity) internal {
-    bytes32 token = Token.get(PLAYER_TOKEN);
+    bytes32 token = Token.get(entity);
     if (token != bytes32(0)) {
       ERC721Logic._burn(token, Id.get(entity));
     } else {
