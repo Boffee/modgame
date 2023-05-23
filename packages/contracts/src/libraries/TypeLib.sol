@@ -8,6 +8,6 @@ library TypeLib {
   function get(bytes32 entity) internal view returns (bytes32) {
     MutationData memory mutation = Mutation.get(entity);
     return
-      mutation.endsAt > block.timestamp ? Type.get(entity) : mutation.entityType;
+      mutation.endsAt > block.timestamp ? mutation.entityType : Type.get(entity);
   }
 }
