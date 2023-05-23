@@ -25,13 +25,17 @@ contract MoveSystem is AuthedSystem, CooldownSystem {
    * @param y The new y position
    */
   function move(bytes32 entity, int128 x, int128 y)
-    external
+    public
     onlyApproved(entity)
     cooldownReady(entity)
   {
     _verifyPosition(entity, x, y);
     _setCooldown(entity, MoveStat.getCooldown(TypeLib.get(entity)));
     IWorld(_world())._move(entity, x, y);
+  }
+
+  function moveRelative(bytes32 entity, int128 xDist, int128 yDist) public {
+    move(entity, Position.getX(entity) + xDist, Position.getY(entity) + yDist);
   }
 
   function turn(bytes32 entity, OrientationType orientation)

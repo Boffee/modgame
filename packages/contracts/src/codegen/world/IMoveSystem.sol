@@ -8,5 +8,7 @@ import { OrientationType } from "./../Types.sol";
 interface IMoveSystem {
   function move(bytes32 entity, int128 x, int128 y) external;
 
+  function moveRelative(bytes32 entity, int128 xDist, int128 yDist) external;
+
   function turn(bytes32 entity, OrientationType orientation) external;
 }
