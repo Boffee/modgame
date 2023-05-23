@@ -13,6 +13,7 @@ contract PlayerSpawnSystem is System {
 
   function spawn(bytes32 type_, int128 x, int128 y) external {
     require(type_ == RED || type_ == GREEN || type_ == BLUE, "invalid type");
+    // BUG: this breaks auth, but it's fine for the demo
     bytes32 entity = _msgSender().toBytes32();
     require(Owner.get(entity) == bytes32(0), "already spawned");
     Owner.set(entity, entity);
