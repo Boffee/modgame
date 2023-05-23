@@ -98,3 +98,23 @@ contract KillLeft4 is KillBase {
     _kill(source, DirectionType.Left, 4);
   }
 }
+
+contract KillRandom is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    uint128 random =
+      uint128(uint256(keccak256(abi.encodePacked(block.timestamp))));
+    DirectionType direction = DirectionType(random % 4);
+    random = uint128(uint256(keccak256(abi.encodePacked(random))));
+    int128 distance = int128(1 + (random % 4));
+    _kill(source, direction, distance);
+  }
+}
+
+contract KillWithin1 is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    _kill(source, DirectionType.Forward, 1);
+    _kill(source, DirectionType.Right, 1);
+    _kill(source, DirectionType.Backward, 1);
+    _kill(source, DirectionType.Left, 1);
+  }
+}

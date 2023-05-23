@@ -98,3 +98,23 @@ contract AttackLeft4 is AttackBase {
     _attack(source, DirectionType.Left, 4);
   }
 }
+
+contract AttackRandom is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    uint128 random =
+      uint128(uint256(keccak256(abi.encodePacked(block.timestamp))));
+    DirectionType direction = DirectionType(random % 4);
+    random = uint128(uint256(keccak256(abi.encodePacked(random))));
+    int128 distance = int128(1 + (random % 4));
+    _attack(source, direction, distance);
+  }
+}
+
+contract AttackWithin1 is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    _attack(source, DirectionType.Forward, 1);
+    _attack(source, DirectionType.Right, 1);
+    _attack(source, DirectionType.Backward, 1);
+    _attack(source, DirectionType.Left, 1);
+  }
+}

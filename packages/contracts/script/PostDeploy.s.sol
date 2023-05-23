@@ -48,6 +48,7 @@ contract PostDeploy is Script {
     world.registerHookHandler("moveLeft1", address(new MoveLeft1()));
     world.registerHookHandler("moveLeft2", address(new MoveLeft2()));
     world.registerHookHandler("moveLeft4", address(new MoveLeft4()));
+    world.registerHookHandler("moveRandom", address(new MoveRandom()));
 
     world.registerHookHandler("killForward1", address(new KillForward1()));
     world.registerHookHandler("killForward2", address(new KillForward2()));
@@ -61,6 +62,8 @@ contract PostDeploy is Script {
     world.registerHookHandler("killLeft1", address(new KillLeft1()));
     world.registerHookHandler("killLeft2", address(new KillLeft2()));
     world.registerHookHandler("killLeft4", address(new KillLeft4()));
+    world.registerHookHandler("killRandom", address(new KillRandom()));
+    world.registerHookHandler("killWithin1", address(new KillWithin1()));
 
     world.registerHookHandler("attackForward1", address(new AttackForward1()));
     world.registerHookHandler("attackForward2", address(new AttackForward2()));
@@ -74,6 +77,8 @@ contract PostDeploy is Script {
     world.registerHookHandler("attackLeft1", address(new AttackLeft1()));
     world.registerHookHandler("attackLeft2", address(new AttackLeft2()));
     world.registerHookHandler("attackLeft4", address(new AttackLeft4()));
+    world.registerHookHandler("attackRandom", address(new AttackRandom()));
+    world.registerHookHandler("attackWithin1", address(new AttackWithin1()));
 
     world.registerHookHandler("triggerForward1", address(new TriggerForward1()));
     world.registerHookHandler("triggerForward2", address(new TriggerForward2()));
@@ -93,6 +98,8 @@ contract PostDeploy is Script {
     world.registerHookHandler("triggerLeft1", address(new TriggerLeft1()));
     world.registerHookHandler("triggerLeft2", address(new TriggerLeft2()));
     world.registerHookHandler("triggerLeft4", address(new TriggerLeft4()));
+    world.registerHookHandler("triggerRandom", address(new TriggerRandom()));
+    world.registerHookHandler("triggerWithin1", address(new TriggerWithin1()));
 
     vm.stopBroadcast();
   }

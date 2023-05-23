@@ -98,3 +98,23 @@ contract TriggerLeft4 is TriggerBase {
     _trigger(source, DirectionType.Left, 4);
   }
 }
+
+contract TriggerRandom is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    uint128 random =
+      uint128(uint256(keccak256(abi.encodePacked(block.timestamp))));
+    DirectionType direction = DirectionType(random % 4);
+    random = uint128(uint256(keccak256(abi.encodePacked(random))));
+    int128 distance = int128(1 + (random % 4));
+    _trigger(source, direction, distance);
+  }
+}
+
+contract TriggerWithin1 is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    _trigger(source, DirectionType.Forward, 1);
+    _trigger(source, DirectionType.Right, 1);
+    _trigger(source, DirectionType.Backward, 1);
+    _trigger(source, DirectionType.Left, 1);
+  }
+}
