@@ -9,6 +9,7 @@ import {IWorld} from "../src/codegen/world/IWorld.sol";
 import "../src/codegen/Tables.sol";
 import "../src/constants.sol";
 import "../src/reactions/MoveReaction.sol";
+import "../src/reactions/TriggerReaction.sol";
 
 contract PostDeploy is Script {
   function run(address worldAddress) external {
@@ -45,6 +46,25 @@ contract PostDeploy is Script {
     world.registerHookHandler("moveLeft1", address(new MoveLeft1()));
     world.registerHookHandler("moveLeft2", address(new MoveLeft2()));
     world.registerHookHandler("moveLeft4", address(new MoveLeft4()));
+
+    world.registerHookHandler("triggerForward1", address(new TriggerForward1()));
+    world.registerHookHandler("triggerForward2", address(new TriggerForward2()));
+    world.registerHookHandler("triggerForward4", address(new TriggerForward4()));
+    world.registerHookHandler("triggerRight1", address(new TriggerRight1()));
+    world.registerHookHandler("triggerRight2", address(new TriggerRight2()));
+    world.registerHookHandler("triggerRight4", address(new TriggerRight4()));
+    world.registerHookHandler(
+      "triggerBackward1", address(new TriggerBackward1())
+    );
+    world.registerHookHandler(
+      "triggerBackward2", address(new TriggerBackward2())
+    );
+    world.registerHookHandler(
+      "triggerBackward4", address(new TriggerBackward4())
+    );
+    world.registerHookHandler("triggerLeft1", address(new TriggerLeft1()));
+    world.registerHookHandler("triggerLeft2", address(new TriggerLeft2()));
+    world.registerHookHandler("triggerLeft4", address(new TriggerLeft4()));
 
     vm.stopBroadcast();
   }
