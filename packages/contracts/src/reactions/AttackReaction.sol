@@ -39,6 +39,12 @@ contract AttackForward2S is AttackBase {
   }
 }
 
+contract AttackForward3S is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    _attack(source, DirectionType.Forward, 3);
+  }
+}
+
 contract AttackForward4S is AttackBase {
   function execute(bytes32 source, bytes32) external {
     _attack(source, DirectionType.Forward, 4);
@@ -54,6 +60,12 @@ contract AttackRight1S is AttackBase {
 contract AttackRight2S is AttackBase {
   function execute(bytes32 source, bytes32) external {
     _attack(source, DirectionType.Right, 2);
+  }
+}
+
+contract AttackRight3S is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    _attack(source, DirectionType.Right, 3);
   }
 }
 
@@ -75,6 +87,12 @@ contract AttackBackward2S is AttackBase {
   }
 }
 
+contract AttackBackward3S is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    _attack(source, DirectionType.Backward, 3);
+  }
+}
+
 contract AttackBackward4S is AttackBase {
   function execute(bytes32 source, bytes32) external {
     _attack(source, DirectionType.Backward, 4);
@@ -90,6 +108,12 @@ contract AttackLeft1S is AttackBase {
 contract AttackLeft2S is AttackBase {
   function execute(bytes32 source, bytes32) external {
     _attack(source, DirectionType.Left, 2);
+  }
+}
+
+contract AttackLeft3S is AttackBase {
+  function execute(bytes32 source, bytes32) external {
+    _attack(source, DirectionType.Left, 3);
   }
 }
 
@@ -131,6 +155,12 @@ contract AttackForward2T is AttackBase {
   }
 }
 
+contract AttackForward3T is AttackBase {
+  function execute(bytes32, bytes32 target) external {
+    _attack(target, DirectionType.Forward, 3);
+  }
+}
+
 contract AttackForward4T is AttackBase {
   function execute(bytes32, bytes32 target) external {
     _attack(target, DirectionType.Forward, 4);
@@ -146,6 +176,12 @@ contract AttackRight1T is AttackBase {
 contract AttackRight2T is AttackBase {
   function execute(bytes32, bytes32 target) external {
     _attack(target, DirectionType.Right, 2);
+  }
+}
+
+contract AttackRight3T is AttackBase {
+  function execute(bytes32, bytes32 target) external {
+    _attack(target, DirectionType.Right, 3);
   }
 }
 
@@ -167,6 +203,12 @@ contract AttackBackward2T is AttackBase {
   }
 }
 
+contract AttackBackward3T is AttackBase {
+  function execute(bytes32, bytes32 target) external {
+    _attack(target, DirectionType.Backward, 3);
+  }
+}
+
 contract AttackBackward4T is AttackBase {
   function execute(bytes32, bytes32 target) external {
     _attack(target, DirectionType.Backward, 4);
@@ -182,6 +224,12 @@ contract AttackLeft1T is AttackBase {
 contract AttackLeft2T is AttackBase {
   function execute(bytes32, bytes32 target) external {
     _attack(target, DirectionType.Left, 2);
+  }
+}
+
+contract AttackLeft3T is AttackBase {
+  function execute(bytes32, bytes32 target) external {
+    _attack(target, DirectionType.Left, 3);
   }
 }
 

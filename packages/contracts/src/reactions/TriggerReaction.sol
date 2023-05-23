@@ -39,6 +39,12 @@ contract TriggerForward2S is TriggerBase {
   }
 }
 
+contract TriggerForward3S is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    _trigger(source, DirectionType.Forward, 3);
+  }
+}
+
 contract TriggerForward4S is TriggerBase {
   function execute(bytes32 source, bytes32) external {
     _trigger(source, DirectionType.Forward, 4);
@@ -54,6 +60,12 @@ contract TriggerRight1S is TriggerBase {
 contract TriggerRight2S is TriggerBase {
   function execute(bytes32 source, bytes32) external {
     _trigger(source, DirectionType.Right, 2);
+  }
+}
+
+contract TriggerRight3S is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    _trigger(source, DirectionType.Right, 3);
   }
 }
 
@@ -75,6 +87,12 @@ contract TriggerBackward2S is TriggerBase {
   }
 }
 
+contract TriggerBackward3S is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    _trigger(source, DirectionType.Backward, 3);
+  }
+}
+
 contract TriggerBackward4S is TriggerBase {
   function execute(bytes32 source, bytes32) external {
     _trigger(source, DirectionType.Backward, 4);
@@ -90,6 +108,12 @@ contract TriggerLeft1S is TriggerBase {
 contract TriggerLeft2S is TriggerBase {
   function execute(bytes32 source, bytes32) external {
     _trigger(source, DirectionType.Left, 2);
+  }
+}
+
+contract TriggerLeft3S is TriggerBase {
+  function execute(bytes32 source, bytes32) external {
+    _trigger(source, DirectionType.Left, 3);
   }
 }
 
@@ -131,6 +155,12 @@ contract TriggerForward2T is TriggerBase {
   }
 }
 
+contract TriggerForward3T is TriggerBase {
+  function execute(bytes32, bytes32 target) external {
+    _trigger(target, DirectionType.Forward, 3);
+  }
+}
+
 contract TriggerForward4T is TriggerBase {
   function execute(bytes32, bytes32 target) external {
     _trigger(target, DirectionType.Forward, 4);
@@ -146,6 +176,12 @@ contract TriggerRight1T is TriggerBase {
 contract TriggerRight2T is TriggerBase {
   function execute(bytes32, bytes32 target) external {
     _trigger(target, DirectionType.Right, 2);
+  }
+}
+
+contract TriggerRight3T is TriggerBase {
+  function execute(bytes32, bytes32 target) external {
+    _trigger(target, DirectionType.Right, 3);
   }
 }
 
@@ -167,6 +203,12 @@ contract TriggerBackward2T is TriggerBase {
   }
 }
 
+contract TriggerBackward3T is TriggerBase {
+  function execute(bytes32, bytes32 target) external {
+    _trigger(target, DirectionType.Backward, 3);
+  }
+}
+
 contract TriggerBackward4T is TriggerBase {
   function execute(bytes32, bytes32 target) external {
     _trigger(target, DirectionType.Backward, 4);
@@ -182,6 +224,12 @@ contract TriggerLeft1T is TriggerBase {
 contract TriggerLeft2T is TriggerBase {
   function execute(bytes32, bytes32 target) external {
     _trigger(target, DirectionType.Left, 2);
+  }
+}
+
+contract TriggerLeft3T is TriggerBase {
+  function execute(bytes32, bytes32 target) external {
+    _trigger(target, DirectionType.Left, 3);
   }
 }
 

@@ -33,6 +33,12 @@ contract MoveForward2S is MoveBase {
   }
 }
 
+contract MoveForward3S is MoveBase {
+  function execute(bytes32 source, bytes32) external {
+    _move(source, DirectionType.Forward, 3);
+  }
+}
+
 contract MoveForward4S is MoveBase {
   function execute(bytes32 source, bytes32) external {
     _move(source, DirectionType.Forward, 4);
@@ -48,6 +54,12 @@ contract MoveRight1S is MoveBase {
 contract MoveRight2S is MoveBase {
   function execute(bytes32 source, bytes32) external {
     _move(source, DirectionType.Right, 2);
+  }
+}
+
+contract MoveRight3S is MoveBase {
+  function execute(bytes32 source, bytes32) external {
+    _move(source, DirectionType.Right, 3);
   }
 }
 
@@ -69,6 +81,12 @@ contract MoveBackward2S is MoveBase {
   }
 }
 
+contract MoveBackward3S is MoveBase {
+  function execute(bytes32 source, bytes32) external {
+    _move(source, DirectionType.Backward, 3);
+  }
+}
+
 contract MoveBackward4S is MoveBase {
   function execute(bytes32 source, bytes32) external {
     _move(source, DirectionType.Backward, 4);
@@ -84,6 +102,12 @@ contract MoveLeft1S is MoveBase {
 contract MoveLeft2S is MoveBase {
   function execute(bytes32 source, bytes32) external {
     _move(source, DirectionType.Left, 2);
+  }
+}
+
+contract MoveLeft3S is MoveBase {
+  function execute(bytes32 source, bytes32) external {
+    _move(source, DirectionType.Left, 3);
   }
 }
 
@@ -116,6 +140,12 @@ contract MoveForward2T is MoveBase {
   }
 }
 
+contract MoveForward3T is MoveBase {
+  function execute(bytes32, bytes32 target) external {
+    _move(target, DirectionType.Forward, 3);
+  }
+}
+
 contract MoveForward4T is MoveBase {
   function execute(bytes32, bytes32 target) external {
     _move(target, DirectionType.Forward, 4);
@@ -131,6 +161,12 @@ contract MoveRight1T is MoveBase {
 contract MoveRight2T is MoveBase {
   function execute(bytes32, bytes32 target) external {
     _move(target, DirectionType.Right, 2);
+  }
+}
+
+contract MoveRight3T is MoveBase {
+  function execute(bytes32, bytes32 target) external {
+    _move(target, DirectionType.Right, 3);
   }
 }
 
@@ -152,6 +188,12 @@ contract MoveBackward2T is MoveBase {
   }
 }
 
+contract MoveBackward3T is MoveBase {
+  function execute(bytes32, bytes32 target) external {
+    _move(target, DirectionType.Backward, 3);
+  }
+}
+
 contract MoveBackward4T is MoveBase {
   function execute(bytes32, bytes32 target) external {
     _move(target, DirectionType.Backward, 4);
@@ -167,6 +209,12 @@ contract MoveLeft1T is MoveBase {
 contract MoveLeft2T is MoveBase {
   function execute(bytes32, bytes32 target) external {
     _move(target, DirectionType.Left, 2);
+  }
+}
+
+contract MoveLeft3T is MoveBase {
+  function execute(bytes32, bytes32 target) external {
+    _move(target, DirectionType.Left, 3);
   }
 }
 

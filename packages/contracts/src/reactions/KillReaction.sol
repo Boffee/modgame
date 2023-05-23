@@ -39,6 +39,12 @@ contract KillForward2S is KillBase {
   }
 }
 
+contract KillForward3S is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    _kill(source, DirectionType.Forward, 3);
+  }
+}
+
 contract KillForward4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 4);
@@ -54,6 +60,12 @@ contract KillRight1S is KillBase {
 contract KillRight2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Right, 2);
+  }
+}
+
+contract KillRight3S is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    _kill(source, DirectionType.Right, 3);
   }
 }
 
@@ -75,6 +87,12 @@ contract KillBackward2S is KillBase {
   }
 }
 
+contract KillBackward3S is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    _kill(source, DirectionType.Backward, 3);
+  }
+}
+
 contract KillBackward4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Backward, 4);
@@ -90,6 +108,12 @@ contract KillLeft1S is KillBase {
 contract KillLeft2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Left, 2);
+  }
+}
+
+contract KillLeft3S is KillBase {
+  function execute(bytes32 source, bytes32) external {
+    _kill(source, DirectionType.Left, 3);
   }
 }
 
@@ -131,6 +155,12 @@ contract KillForward2T is KillBase {
   }
 }
 
+contract KillForward3T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Forward, 3);
+  }
+}
+
 contract KillForward4T is KillBase {
   function execute(bytes32, bytes32 target) external {
     _kill(target, DirectionType.Forward, 4);
@@ -146,6 +176,12 @@ contract KillRight1T is KillBase {
 contract KillRight2T is KillBase {
   function execute(bytes32, bytes32 target) external {
     _kill(target, DirectionType.Right, 2);
+  }
+}
+
+contract KillRight3T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Right, 3);
   }
 }
 
@@ -167,6 +203,12 @@ contract KillBackward2T is KillBase {
   }
 }
 
+contract KillBackward3T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Backward, 3);
+  }
+}
+
 contract KillBackward4T is KillBase {
   function execute(bytes32, bytes32 target) external {
     _kill(target, DirectionType.Backward, 4);
@@ -182,6 +224,12 @@ contract KillLeft1T is KillBase {
 contract KillLeft2T is KillBase {
   function execute(bytes32, bytes32 target) external {
     _kill(target, DirectionType.Left, 2);
+  }
+}
+
+contract KillLeft3T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Left, 3);
   }
 }
 
