@@ -11,7 +11,13 @@ import {
   PositionTableId
 } from "../codegen/tables/Position.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
-import {ON_ENTER, ON_LEAVE} from "../constants.sol";
+import {
+  ON_ENTER,
+  ON_LEAVE,
+  ON_MOVE_START,
+  ON_MOVE_END,
+  NULL
+} from "../constants.sol";
 import {EntityHookSystem} from "../extensions/EntityHookSystem.sol";
 
 /**
@@ -25,6 +31,7 @@ contract MoveSubSystem is EntityHookSystem {
   }
 
   function _move(bytes32 entity, int128 x, int128 y) public {
+    _callHook(ON_MOVE_START, entity, NULL);
     _callHooks(
       ON_LEAVE,
       entity,
@@ -40,6 +47,7 @@ contract MoveSubSystem is EntityHookSystem {
     _callHooks(
       ON_ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
     );
+    _callHook(ON_MOVE_END, entity, NULL);
   }
 
   function _traverse(bytes32 entity, uint256 directions) external {

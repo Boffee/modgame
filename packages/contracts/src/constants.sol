@@ -5,6 +5,8 @@ bytes32 constant NULL = bytes32("NULL");
 
 bytes32 constant ON_ENTER = bytes32("ON_ENTER");
 bytes32 constant ON_LEAVE = bytes32("ON_LEAVE");
+bytes32 constant ON_MOVE_START = bytes32("ON_MOVE_START");
+bytes32 constant ON_MOVE_END = bytes32("ON_MOVE_END");
 bytes32 constant ON_TRIGGER = bytes32("ON_TRIGGER");
 bytes32 constant ON_ATTACK = bytes32("ON_ATTACK");
 bytes32 constant ON_HIT = bytes32("ON_HIT");

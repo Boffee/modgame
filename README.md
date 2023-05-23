@@ -37,7 +37,9 @@ Currently, Mod Game supports the following hooks:
 
 - Move Hooks:
   - **onEnter**: called when an entity enters a tile
-  - **onEnter**: called when an entity leaves a tile
+  - **onLeave**: called when an entity leaves a tile
+  - **onMoveStart**: called when an entity initiates a move
+  - **onMoveEnd**: called when an entity completes a move
 - Attack Hooks:
   - **onAttack**: called when an entity attacks another entity
   - **onHit**: called when an entity is hit by another entity
