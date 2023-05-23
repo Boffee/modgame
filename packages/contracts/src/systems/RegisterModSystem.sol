@@ -5,9 +5,14 @@ import {Immutable} from "../codegen/tables/Immutable.sol";
 import {ModList} from "../codegen/tables/ModList.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {AuthedSystem} from "./AuthedSystem.sol";
+import {MutableSystem} from "./MutableSystem.sol";
 
-contract RegisterModSystem is AuthedSystem {
-  function registerMod(bytes32 entityType) external onlyApproved(entityType) {
+contract RegisterModSystem is AuthedSystem, MutableSystem {
+  function registerMod(bytes32 entityType)
+    external
+    onlyApproved(entityType)
+    onlyMutable(entityType)
+  {
     Immutable.set(entityType, true);
     ModList.push(entityType);
   }

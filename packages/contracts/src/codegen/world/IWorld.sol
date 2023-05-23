@@ -14,6 +14,7 @@ import { IEntityHookSystem } from "./IEntityHookSystem.sol";
 import { IHookHandlerProxySubSystem } from "./IHookHandlerProxySubSystem.sol";
 import { IMoveSubSystem } from "./IMoveSubSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
+import { IMutableSystem } from "./IMutableSystem.sol";
 import { IRegisterHookHandlerSystem } from "./IRegisterHookHandlerSystem.sol";
 import { IRegisterModSystem } from "./IRegisterModSystem.sol";
 import { ISpawnSystem } from "./ISpawnSystem.sol";
@@ -34,6 +35,7 @@ interface IWorld is
   IHookHandlerProxySubSystem,
   IMoveSubSystem,
   IMoveSystem,
+  IMutableSystem,
   IRegisterHookHandlerSystem,
   IRegisterModSystem,
   ISpawnSystem,
