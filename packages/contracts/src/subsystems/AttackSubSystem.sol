@@ -8,6 +8,7 @@ import {Predation} from "../codegen/tables/Predation.sol";
 import {Id} from "../codegen/tables/Id.sol";
 import {Token} from "../codegen/tables/Token.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
+import {Type} from "../codegen/tables/Type.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
 import {EntityHookSystem} from "../extensions/EntityHookSystem.sol";
@@ -55,6 +56,7 @@ contract AttackSubSystem is EntityHookSystem {
     } else {
       Owner.deleteRecord(entity);
     }
+    Type.deleteRecord(entity);
     Position.deleteRecord(entity);
   }
 
