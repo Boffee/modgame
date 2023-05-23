@@ -13,7 +13,5 @@ interface IAttributesSubSystem {
     uint32 moveCD
   ) external;
 
-  function _defineType(bytes32 type_, uint32 attackDist, uint32 attackCD, uint32 moveDist, uint32 moveCD) external;
-
   function _createType(address owner, bytes32 type_) external;
 }

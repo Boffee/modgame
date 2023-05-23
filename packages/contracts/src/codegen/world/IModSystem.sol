@@ -9,12 +9,13 @@ interface IModSystem {
   function configureHookHandler(bytes32 hookType, bytes32 entityType, address handler) external;
 
   function createAndDefineType(
-    address owner,
     bytes32 type_,
     uint32 attackDist,
     uint32 attackCD,
     uint32 moveDist,
-    uint32 moveCD
+    uint32 moveCD,
+    string memory name,
+    string memory description
   ) external;
 
   function registerMod(bytes32 entityType) external;
