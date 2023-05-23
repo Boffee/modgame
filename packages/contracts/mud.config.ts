@@ -27,10 +27,12 @@ export default mudConfig({
     "EntityHookSystem",
   ],
   tables: {
+    // TODO: optimize for gas
     Token: "bytes32",
     Id: "uint256",
     Type: "bytes32",
     Immutable: "bool",
+    Collected: "bool",
     ModList: {
       keySchema: {},
       schema: "bytes32[]",

@@ -11,6 +11,7 @@ import { IHookHandlerProxySubSystem } from "./IHookHandlerProxySubSystem.sol";
 import { IMoveSubSystem } from "./IMoveSubSystem.sol";
 import { ITriggerSubSystem } from "./ITriggerSubSystem.sol";
 import { IAttackSystem } from "./IAttackSystem.sol";
+import { ICollectSystem } from "./ICollectSystem.sol";
 import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IModSystem } from "./IModSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
@@ -29,6 +30,7 @@ interface IWorld is
   IMoveSubSystem,
   ITriggerSubSystem,
   IAttackSystem,
+  ICollectSystem,
   ICommitMoveSystem,
   IModSystem,
   IMoveSystem,

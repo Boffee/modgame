@@ -7,6 +7,7 @@ import { Token, TokenTableId } from "./tables/Token.sol";
 import { Id, IdTableId } from "./tables/Id.sol";
 import { Type, TypeTableId } from "./tables/Type.sol";
 import { Immutable, ImmutableTableId } from "./tables/Immutable.sol";
+import { Collected, CollectedTableId } from "./tables/Collected.sol";
 import { ModList, ModListTableId } from "./tables/ModList.sol";
 import { Orientation, OrientationTableId } from "./tables/Orientation.sol";
 import { MoveStat, MoveStatData, MoveStatTableId } from "./tables/MoveStat.sol";
