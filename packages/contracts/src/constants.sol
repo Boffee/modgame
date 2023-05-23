@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
+bytes32 constant NULL = bytes32("NULL");
+
 bytes32 constant ON_ENTER = bytes32("ON_ENTER");
 bytes32 constant ON_LEAVE = bytes32("ON_LEAVE");
 bytes32 constant ON_TRIGGER = bytes32("ON_TRIGGER");
