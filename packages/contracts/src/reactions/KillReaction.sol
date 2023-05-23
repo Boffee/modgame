@@ -27,79 +27,79 @@ abstract contract KillBase is BaseReaction {
   }
 }
 
-contract KillForward1 is KillBase {
+contract KillForward1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 1);
   }
 }
 
-contract KillForward2 is KillBase {
+contract KillForward2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 2);
   }
 }
 
-contract KillForward4 is KillBase {
+contract KillForward4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 4);
   }
 }
 
-contract KillRight1 is KillBase {
+contract KillRight1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Right, 1);
   }
 }
 
-contract KillRight2 is KillBase {
+contract KillRight2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Right, 2);
   }
 }
 
-contract KillRight4 is KillBase {
+contract KillRight4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Right, 4);
   }
 }
 
-contract KillBackward1 is KillBase {
+contract KillBackward1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Backward, 1);
   }
 }
 
-contract KillBackward2 is KillBase {
+contract KillBackward2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Backward, 2);
   }
 }
 
-contract KillBackward4 is KillBase {
+contract KillBackward4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Backward, 4);
   }
 }
 
-contract KillLeft1 is KillBase {
+contract KillLeft1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Left, 1);
   }
 }
 
-contract KillLeft2 is KillBase {
+contract KillLeft2S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Left, 2);
   }
 }
 
-contract KillLeft4 is KillBase {
+contract KillLeft4S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Left, 4);
   }
 }
 
-contract KillRandom is KillBase {
+contract KillRandomS is KillBase {
   function execute(bytes32 source, bytes32) external {
     uint128 random =
       uint128(uint256(keccak256(abi.encodePacked(block.timestamp))));
@@ -110,11 +110,103 @@ contract KillRandom is KillBase {
   }
 }
 
-contract KillWithin1 is KillBase {
+contract KillWithin1S is KillBase {
   function execute(bytes32 source, bytes32) external {
     _kill(source, DirectionType.Forward, 1);
     _kill(source, DirectionType.Right, 1);
     _kill(source, DirectionType.Backward, 1);
     _kill(source, DirectionType.Left, 1);
+  }
+}
+
+contract KillForward1T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Forward, 1);
+  }
+}
+
+contract KillForward2T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Forward, 2);
+  }
+}
+
+contract KillForward4T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Forward, 4);
+  }
+}
+
+contract KillRight1T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Right, 1);
+  }
+}
+
+contract KillRight2T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Right, 2);
+  }
+}
+
+contract KillRight4T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Right, 4);
+  }
+}
+
+contract KillBackward1T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Backward, 1);
+  }
+}
+
+contract KillBackward2T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Backward, 2);
+  }
+}
+
+contract KillBackward4T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Backward, 4);
+  }
+}
+
+contract KillLeft1T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Left, 1);
+  }
+}
+
+contract KillLeft2T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Left, 2);
+  }
+}
+
+contract KillLeft4T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Left, 4);
+  }
+}
+
+contract KillRandomT is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    uint128 random =
+      uint128(uint256(keccak256(abi.encodePacked(block.timestamp))));
+    DirectionType direction = DirectionType(random % 4);
+    random = uint128(uint256(keccak256(abi.encodePacked(random))));
+    int128 distance = int128(1 + (random % 4));
+    _kill(target, direction, distance);
+  }
+}
+
+contract KillWithin1T is KillBase {
+  function execute(bytes32, bytes32 target) external {
+    _kill(target, DirectionType.Forward, 1);
+    _kill(target, DirectionType.Right, 1);
+    _kill(target, DirectionType.Backward, 1);
+    _kill(target, DirectionType.Left, 1);
   }
 }
