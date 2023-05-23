@@ -59,6 +59,8 @@ The above can be completely done in using the client UI without code. However, i
 
 For more advanced players, you can create custom hooks and add it to the game permissionlessly. The game will automatically enforce the access control of the hook (hooks can only interact with the world through actions; they cannot write to tables).
 
+TODO: Enforce conservation of mass. All items must have a finite lifespan.
+
 # Access Control
 
 All mods inherit the access control of the `Permissioned Proxy Subsystem`, which is restricted to only the `Physics Subsystems`. This means mods are bound by the physics of the world defined in the `Physics Subsystems`.
