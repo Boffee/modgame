@@ -13,3 +13,10 @@ enum OrientationType {
   South,
   West
 }
+
+enum DirectionType {
+  Forward,
+  Right,
+  Backward,
+  Left
+}

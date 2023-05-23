@@ -8,7 +8,6 @@ import {IWorld} from "../src/codegen/world/IWorld.sol";
 //   "../src/systems/HookHandlerProxySubSystem.sol";
 import "../src/codegen/Tables.sol";
 import "../src/constants.sol";
-
 import "../src/reactions/MoveReaction.sol";
 
 contract PostDeploy is Script {
@@ -33,8 +32,20 @@ contract PostDeploy is Script {
     MoveStat.set(world, DUMMY, MoveStatData({maxDistance: 4, cooldown: 5}));
     AttackStat.set(world, DUMMY, AttackStatData({maxDistance: 1, cooldown: 5}));
 
-    vm.stopBroadcast();
-
     // deploy and register hook handlers
+    world.registerHookHandler("moveForward1", address(new MoveForward1()));
+    world.registerHookHandler("moveForward2", address(new MoveForward2()));
+    world.registerHookHandler("moveForward4", address(new MoveForward4()));
+    world.registerHookHandler("moveRight1", address(new MoveRight1()));
+    world.registerHookHandler("moveRight2", address(new MoveRight2()));
+    world.registerHookHandler("moveRight4", address(new MoveRight4()));
+    world.registerHookHandler("moveBackward1", address(new MoveBackward1()));
+    world.registerHookHandler("moveBackward2", address(new MoveBackward2()));
+    world.registerHookHandler("moveBackward4", address(new MoveBackward4()));
+    world.registerHookHandler("moveLeft1", address(new MoveLeft1()));
+    world.registerHookHandler("moveLeft2", address(new MoveLeft2()));
+    world.registerHookHandler("moveLeft4", address(new MoveLeft4()));
+
+    vm.stopBroadcast();
   }
 }

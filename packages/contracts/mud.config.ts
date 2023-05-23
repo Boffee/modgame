@@ -109,6 +109,7 @@ export default mudConfig({
   enums: {
     PositionLevel: ["Underground", "Surface"],
     OrientationType: ["North", "East", "South", "West"],
+    DirectionType: ["Forward", "Right", "Backward", "Left"],
   },
   modules: [
     {
