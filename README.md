@@ -24,7 +24,9 @@ The set of actions that can be performed by any entity in the game are:
 
 - attack
 - move
-- trigger
+- trigger item
+- pick up item
+- drop item
 - create new entity types
 
 # Hooks (Mechanics)
