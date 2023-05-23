@@ -5,16 +5,18 @@ import {IWorld} from "../codegen/world/IWorld.sol";
 import {Orientation} from "../codegen/tables/Orientation.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
+import {Balance} from "../codegen/tables/Balance.sol";
 import {OrientationType} from "../codegen/Types.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
-import {NULL, ON_TRIGGER} from "../constants.sol";
+import {NULL, ON_TRIGGER, ITEM_TOKEN} from "../constants.sol";
 
 contract ItemSystem is AuthedSystem {
   function pickUp(bytes32 entity, bytes32 owner) external onlyApproved(owner) {
     require(Owner.get(entity) == NULL, "already owned");
     require(PositionLib.withinDistance(entity, owner, 1), "too far away");
+    require(Balance.get(ITEM_TOKEN, owner) < 3, "too many items");
     ERC721Logic._transfer(entity, NULL, owner);
     Position.deleteRecord(entity);
     Orientation.deleteRecord(entity);

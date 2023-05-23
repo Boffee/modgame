@@ -8,12 +8,25 @@ import {AuthedSystem} from "../extensions/AuthedSystem.sol";
 import {ITEM_TOKEN} from "../constants.sol";
 
 contract CollectSystem is AuthedSystem {
-  function collectGold(uint256 seed, bytes32 to) public onlyApproved(to) {
-    require(Balance.get(ITEM_TOKEN, to) < 3, "inventory full");
-    GoldSpawnLogic.collect(seed, to);
+  function collectGold(uint256[] memory seedBlockNumbers, bytes32 to)
+    external
+    onlyApproved(to)
+  {
+    for (uint256 i = 0; i < seedBlockNumbers.length; i++) {
+      // TODO: replace with blockHash and enable check
+      // require(seedBlockNumbers[i] > block.number - 256, "expired");
+      GoldSpawnLogic.collect(seedBlockNumbers[i], to);
+    }
   }
 
-  function collectItem(uint256 seed, bytes32 to) public onlyApproved(to) {
-    ItemSpawnLogic.collect(seed, to);
+  function collectItem(uint256[] memory seedBlockNumbers, bytes32 to)
+    external
+    onlyApproved(to)
+  {
+    for (uint256 i = 0; i < seedBlockNumbers.length; i++) {
+      // TODO: replace with blockHash and enable check
+      // require(seedBlockNumbers[i] > block.number - 256, "expired");
+      ItemSpawnLogic.collect(seedBlockNumbers[i], to);
+    }
   }
 }

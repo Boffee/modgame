@@ -6,9 +6,21 @@ pragma solidity >=0.8.0;
 import { OrientationType } from "./../Types.sol";
 
 interface IMoveSystem {
-  function move(bytes32 entity, int128 x, int128 y) external;
+  function move(
+    bytes32 entity,
+    int128 x,
+    int128 y,
+    uint256[] memory goldBlockNumbers,
+    uint256[] memory itemBlockNumbers
+  ) external;
 
-  function moveRelative(bytes32 entity, int128 xDist, int128 yDist) external;
+  function moveRelative(
+    bytes32 entity,
+    int128 xDist,
+    int128 yDist,
+    uint256[] memory goldBlockNumbers,
+    uint256[] memory itemBlockNumbers
+  ) external;
 
   function turn(bytes32 entity, OrientationType orientation) external;
 }

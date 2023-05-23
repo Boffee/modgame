@@ -4,6 +4,7 @@ pragma solidity >=0.8.0;
 import {ModList} from "../codegen/tables/ModList.sol";
 import {Type} from "../codegen/tables/Type.sol";
 import {Collected} from "../codegen/tables/Collected.sol";
+import {Balance} from "../codegen/tables/Balance.sol";
 import {ERC721Logic} from "../libraries/ERC721Logic.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
 import {TypeCast} from "../libraries/TypeCast.sol";
@@ -14,7 +15,9 @@ library ItemSpawnLogic {
 
   function collect(uint256 seed, bytes32 to) internal {
     bytes32 key = keccak256(abi.encode(ITEM_TOKEN, seed));
-    require(!Collected.get(key), "already collected");
+    // TODO: re-enable require
+    // require(!Collected.get(key), "already collected");
+    if (Collected.get(key) || Balance.get(ITEM_TOKEN, to) >= 3) return;
 
     (int128 x, int128 y, bytes32 item) = getItemSpawn(uint256(seed));
     require(PositionLib.collocated(to, x, y), "not collocated");
