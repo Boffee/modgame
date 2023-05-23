@@ -2,13 +2,6 @@
 pragma solidity >=0.8.0;
 
 library DelegateCall {
-  function functionDelegateCall(address to, bytes4 selector, bytes memory args)
-    internal
-    returns (bytes memory)
-  {
-    return functionDelegateCall(to, abi.encodeWithSelector(selector, args));
-  }
-
   function functionDelegateCall(address to, bytes memory selectorAndArgs)
     internal
     returns (bytes memory)

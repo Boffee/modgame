@@ -11,8 +11,11 @@ contract HookHandlerProxySubSystem is System {
   using DelegateCall for address;
 
   function execute(bytes32 hookType, bytes32 source, bytes32 target) external {
-    HookHandler.get(hookType, TypeLib.get(target)).functionDelegateCall(
-      IHookHandler.execute.selector, abi.encode(source, target)
+    if (source == target) return;
+    address handler = HookHandler.get(hookType, TypeLib.get(target));
+    if (handler == address(0)) return;
+    handler.functionDelegateCall(
+      abi.encodeWithSelector(IHookHandler.execute.selector, source, target)
     );
   }
 }
