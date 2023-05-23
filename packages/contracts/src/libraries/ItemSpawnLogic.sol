@@ -32,8 +32,8 @@ library ItemSpawnLogic {
     returns (bytes32 item)
   {
     uint256 tokenId = ERC721Logic._mint(ITEM_TOKEN, to);
+    item = ERC721Logic.toEntity(ITEM_TOKEN, tokenId);
     Type.set(item, itemType);
-    return ERC721Logic.toEntity(ITEM_TOKEN, tokenId);
   }
 
   function getItemSpawn(uint256 seed)
@@ -50,9 +50,9 @@ library ItemSpawnLogic {
     pure
     returns (int128 x, int128 y)
   {
-    int256 rng = int256(random(seed));
-    x = int128(rng % 1000 - 500);
-    y = int128((rng / 1000) % 1000 - 500);
+    uint256 rng = random(seed);
+    x = int128(int256(rng % 1000) - 500);
+    y = int128(int256((rng / 1000) % 1000) - 500);
   }
 
   function sampleItemType(uint256 seed) internal view returns (bytes32) {
