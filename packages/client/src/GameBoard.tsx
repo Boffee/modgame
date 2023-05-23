@@ -1,4 +1,5 @@
 import { useComponentValue } from "@latticexyz/react";
+import { useEffect } from "react";
 import GameMap from "./GameMap";
 import { useMUD } from "./MUDContext";
 import { useKeyboardMovement } from "./hooks/useKeyboardMovement";
@@ -11,11 +12,19 @@ export default function GameBoard({ rows, cols }: GameBoardProps) {
   useKeyboardMovement();
 
   const {
-    components: { Position },
+    components: { Position, Owner },
+    systemCalls: { spawn },
     network: { playerEntity },
   } = useMUD();
 
+  const owner = useComponentValue(Owner, playerEntity)?.value;
   const position = useComponentValue(Position, playerEntity);
+
+  useEffect(() => {
+    if (!owner) {
+      spawn();
+    }
+  }, [owner]);
 
   return (
     <GameMap

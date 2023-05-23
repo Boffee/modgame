@@ -10,27 +10,26 @@ export const App = () => {
   } = useMUD();
 
   return (
-    <>
-      <div
-        style={{
-          // vertically center the game board
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+    <div
+      style={{
+        // vertically center the game board
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundColor: "#111",
+      }}
+    >
+      <GameBoard rows={33} cols={33} />
+      <button
+        type="button"
+        onClick={async (event) => {
+          event.preventDefault();
+          await spawn();
+          console.log("spawned");
         }}
       >
-        <GameBoard rows={41} cols={41} />
-        <button
-          type="button"
-          onClick={async (event) => {
-            event.preventDefault();
-            await spawn();
-            console.log("spawned");
-          }}
-        >
-          Play
-        </button>
-      </div>
-    </>
+        Play
+      </button>
+    </div>
   );
 };

@@ -14,5 +14,13 @@ export default function EntityLayer({ entity }: EntityLayerProps) {
   const type = useComponentValue(Type, entity);
   const uri = useComponentValue(ImageUri, type?.value as Entity);
 
-  return <>{uri?.value || "🪨"}</>;
+  return (
+    <div
+      style={{
+        position: "absolute",
+      }}
+    >
+      {uri?.value || "?"}
+    </div>
+  );
 }

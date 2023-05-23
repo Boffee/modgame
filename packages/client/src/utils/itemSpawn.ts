@@ -36,11 +36,15 @@ function now() {
 
 const cache: Record<string, BigNumberish[]> = {};
 
-const startTime = now() - 10000;
+export const SPAWN_AMOUNT = 10000;
 
-for (let i = 0; i < 10000; i++) {
-  getPosition(startTime + i);
-}
+const startTime = now() - SPAWN_AMOUNT * 2;
+
+setTimeout(() => {
+  for (let i = 0; i < SPAWN_AMOUNT * 2; i++) {
+    getPosition(startTime + i);
+  }
+}, 1);
 
 setInterval(() => {
   const time = now();
@@ -55,8 +59,6 @@ function getSeedsAtPosition(x: number, y: number, start: number, end: number) {
     ) || []
   );
 }
-
-export const SPAWN_AMOUNT = 2000;
 
 export function getItemSeedsAtPosition(x: number, y: number) {
   const time = now();

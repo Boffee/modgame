@@ -26,7 +26,17 @@ export default function Tile({ x, y }: TileProps) {
   ]);
 
   return (
-    <div style={{ width: 20, height: 20, fontSize: 18 }}>
+    <div
+      style={{
+        width: 30,
+        height: 30,
+        fontSize: 24,
+        color: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {Array.from(matchingEntities).map((entity) => (
         <EntityLayer key={entity} entity={entity} />
       ))}
@@ -36,6 +46,7 @@ export default function Tile({ x, y }: TileProps) {
       {itemSeeds.map((seed) => (
         <ItemSpawnLayer key={seed.toString()} x={x} y={y} seed={seed} />
       ))}
+      <span style={{ color: "#222", fontSize: 24 }}>·</span>
     </div>
   );
 }

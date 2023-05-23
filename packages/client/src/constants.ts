@@ -18,3 +18,8 @@ export const ON_KILL = ethers.utils.formatBytes32String("ON_KILL");
 export const RED = ethers.utils.formatBytes32String("RED");
 export const GREEN = ethers.utils.formatBytes32String("GREEN");
 export const BLUE = ethers.utils.formatBytes32String("BLUE");
+
+export const DOGE = ethers.utils.formatBytes32String("DOGE");
+export const BEAR = ethers.utils.formatBytes32String("BEAR");
+export const CONVEYER = ethers.utils.formatBytes32String("CONVEYER");
+export const WALL = ethers.utils.formatBytes32String("WALL");

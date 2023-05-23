@@ -27,5 +27,5 @@ export default function ItemSpawnLayer({ x, y, seed }: ItemSpawnLayerProps) {
 
   const itemType = modList[getItemIndex(seed, modList.length)];
 
-  return <TypeLayer type={itemType as Entity} />;
+  return <TypeLayer inactive type={itemType as Entity} />;
 }
