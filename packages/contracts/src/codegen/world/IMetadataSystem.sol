@@ -7,4 +7,6 @@ interface IMetadataSystem {
   function setName(bytes32 entity, string memory name) external;
 
   function setDescription(bytes32 entity, string memory description) external;
+
+  function setImageUri(bytes32 entity, string memory imageUri) external;
 }

@@ -80,6 +80,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    ImageUri: (() => {
+      const tableId = new TableId("", "ImageUri");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Immutable: (() => {
       const tableId = new TableId("", "Immutable");
       return defineComponent(

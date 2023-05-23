@@ -8,6 +8,7 @@ import { Id, IdTableId } from "./tables/Id.sol";
 import { Type, TypeTableId } from "./tables/Type.sol";
 import { Name, NameTableId } from "./tables/Name.sol";
 import { Description, DescriptionTableId } from "./tables/Description.sol";
+import { ImageUri, ImageUriTableId } from "./tables/ImageUri.sol";
 import { Immutable, ImmutableTableId } from "./tables/Immutable.sol";
 import { Collected, CollectedTableId } from "./tables/Collected.sol";
 import { ModList, ModListTableId } from "./tables/ModList.sol";

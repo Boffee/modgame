@@ -7,6 +7,7 @@ import {ModList} from "../codegen/tables/ModList.sol";
 import {HookHandler} from "../codegen/tables/HookHandler.sol";
 import {Name} from "../codegen/tables/Name.sol";
 import {Description} from "../codegen/tables/Description.sol";
+import {ImageUri} from "../codegen/tables/ImageUri.sol";
 import {HookHandlerRegistry} from "../codegen/tables/HookHandlerRegistry.sol";
 import {ModList} from "../codegen/tables/ModList.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";
@@ -34,7 +35,8 @@ contract ModSystem is AuthedSystem, MutableSystem {
     uint32 moveDist,
     uint32 moveCD,
     string memory name,
-    string memory description
+    string memory description,
+    string memory imageUri
   ) external {
     // TODO: check if using type_ is safe
     IWorld(_world())._createAndDefineType(
@@ -42,6 +44,7 @@ contract ModSystem is AuthedSystem, MutableSystem {
     );
     Name.set(type_, name);
     Description.set(type_, description);
+    ImageUri.set(type_, imageUri);
   }
 
   function registerMod(bytes32 entityType)

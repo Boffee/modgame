@@ -37,6 +37,7 @@ export default mudConfig({
     Type: "bytes32",
     Name: "string",
     Description: "string",
+    ImageUri: "string",
     Immutable: "bool",
     Collected: "bool",
     ModList: {

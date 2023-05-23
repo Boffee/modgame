@@ -15,7 +15,8 @@ interface IModSystem {
     uint32 moveDist,
     uint32 moveCD,
     string memory name,
-    string memory description
+    string memory description,
+    string memory imageUri
   ) external;
 
   function registerMod(bytes32 entityType) external;
