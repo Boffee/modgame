@@ -38,7 +38,7 @@ library ERC721Logic {
     Token.set(entity, token);
     Id.set(entity, tokenId);
 
-    Owner.set(token, to);
+    Owner.set(entity, to);
   }
 
   function _transfer(bytes32 entity, bytes32 from, bytes32 to) internal {
@@ -66,7 +66,7 @@ library ERC721Logic {
     Balance.set(token, from, Balance.get(token, from) - 1);
     Balance.set(token, to, Balance.get(token, to) + 1);
 
-    Owner.set(token, to);
+    Owner.set(entity, to);
   }
 
   function _burn(bytes32 entity) internal {
@@ -87,7 +87,9 @@ library ERC721Logic {
     Balance.set(token, owner, Balance.get(token, owner) - 1);
     TotalSupply.set(token, TotalSupply.get(token) - 1);
 
-    Owner.deleteRecord(token);
+    Token.deleteRecord(entity);
+    Id.deleteRecord(entity);
+    Owner.deleteRecord(entity);
   }
 
   function _exists(bytes32 entity) internal view returns (bool) {
