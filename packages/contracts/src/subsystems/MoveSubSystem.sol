@@ -10,6 +10,8 @@ import {
   PositionData,
   PositionTableId
 } from "../codegen/tables/Position.sol";
+import {Orientation} from "../codegen/tables/Orientation.sol";
+import {OrientationType, DirectionType} from "../codegen/Types.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {
   ON_ENTER,
@@ -48,6 +50,16 @@ contract MoveSubSystem is EntityHookSystem {
       ON_ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
     );
     _callHook(ON_MOVE_END, entity, NULL);
+  }
+
+  function _turnRelative(bytes32 entity, DirectionType direction) public {
+    Orientation.set(
+      entity, OrientationType(uint8(Orientation.get(entity)) + uint8(direction))
+    );
+  }
+
+  function _turn(bytes32 entity, OrientationType orientation) public {
+    Orientation.set(entity, orientation);
   }
 
   function _traverse(bytes32 entity, uint256 directions) external {

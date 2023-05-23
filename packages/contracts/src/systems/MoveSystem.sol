@@ -5,6 +5,7 @@ import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
 import {IWorld} from "../codegen/world/IWorld.sol";
 import {MoveStat} from "../codegen/tables/MoveStat.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
+import {OrientationType} from "../codegen/Types.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
 import {AuthedSystem} from "../extensions/AuthedSystem.sol";
@@ -31,6 +32,13 @@ contract MoveSystem is AuthedSystem, CooldownSystem {
     _verifyPosition(entity, x, y);
     _setCooldown(entity, MoveStat.getCooldown(TypeLib.get(entity)));
     IWorld(_world())._move(entity, x, y);
+  }
+
+  function turn(bytes32 entity, OrientationType orientation)
+    external
+    onlyApproved(entity)
+  {
+    IWorld(_world())._turn(entity, orientation);
   }
 
   function _verifyPosition(bytes32 entity, int128 x, int128 y) internal view {
