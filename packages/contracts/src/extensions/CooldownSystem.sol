@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
+import {System} from "@latticexyz/world/src/System.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {Cooldown, CooldownData} from "../codegen/tables/Cooldown.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
-import {AuthedSystem} from "./AuthedSystem.sol";
 
 /**
  * @notice A system that requires an entity to be off cooldown. Cooldown is
@@ -15,7 +15,7 @@ import {AuthedSystem} from "./AuthedSystem.sol";
  * subsequent action by the reserve amount. This is meant to prevent bots with
  * perfect timing from having an advantage over human players.
  */
-contract AuthedCooldownSystem is AuthedSystem {
+contract CooldownSystem is System {
   /**
    * @notice Checks if the entity is off cooldown
    * @param entity The entity to check

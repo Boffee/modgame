@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {AuthedSystem} from "./AuthedSystem.sol";
+import {AuthedSystem} from "../extensions/AuthedSystem.sol";
 import {EntityHookSystem} from "./EntityHookSystem.sol";
 import {ON_TRIGGER} from "../constants.sol";
 

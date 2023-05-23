@@ -7,7 +7,7 @@ import {AttackStat, AttackStatData} from "../codegen/tables/AttackStat.sol";
 import {MoveStat, MoveStatData} from "../codegen/tables/MoveStat.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {Immutable} from "../codegen/tables/Immutable.sol";
-import {AuthedSystem} from "./AuthedSystem.sol";
+import {AuthedSystem} from "../extensions/AuthedSystem.sol";
 
 contract AttributesSubSystem is AuthedSystem {
   /**

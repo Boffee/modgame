@@ -9,12 +9,13 @@ import {MoveCommitment} from "../codegen/tables/MoveCommitment.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {PositionLib} from "../libraries/PositionLib.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
-import {AuthedCooldownSystem} from "./AuthedCooldownSystem.sol";
+import {AuthedSystem} from "../extensions/AuthedSystem.sol";
+import {CooldownSystem} from "../extensions/CooldownSystem.sol";
 
 /**
  * @notice A system that allows an entity to move
  */
-contract CommitMoveSystem is AuthedCooldownSystem {
+contract CommitMoveSystem is AuthedSystem, CooldownSystem {
   using SignedMath for int128;
   using TypeLib for bytes32;
 

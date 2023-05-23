@@ -7,14 +7,11 @@ import { IBaseWorld } from "@latticexyz/world/src/interfaces/IBaseWorld.sol";
 
 import { IAttackSubSystem } from "./IAttackSubSystem.sol";
 import { IAttributesSubSystem } from "./IAttributesSubSystem.sol";
-import { IAuthedCooldownSystem } from "./IAuthedCooldownSystem.sol";
-import { IAuthedSystem } from "./IAuthedSystem.sol";
 import { ICommitMoveSystem } from "./ICommitMoveSystem.sol";
 import { IEntityHookSystem } from "./IEntityHookSystem.sol";
 import { IHookHandlerProxySubSystem } from "./IHookHandlerProxySubSystem.sol";
 import { IMoveSubSystem } from "./IMoveSubSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
-import { IMutableSystem } from "./IMutableSystem.sol";
 import { IRegisterHookHandlerSystem } from "./IRegisterHookHandlerSystem.sol";
 import { IRegisterModSystem } from "./IRegisterModSystem.sol";
 import { ISpawnSystem } from "./ISpawnSystem.sol";
@@ -28,14 +25,11 @@ interface IWorld is
   IBaseWorld,
   IAttackSubSystem,
   IAttributesSubSystem,
-  IAuthedCooldownSystem,
-  IAuthedSystem,
   ICommitMoveSystem,
   IEntityHookSystem,
   IHookHandlerProxySubSystem,
   IMoveSubSystem,
   IMoveSystem,
-  IMutableSystem,
   IRegisterHookHandlerSystem,
   IRegisterModSystem,
   ISpawnSystem,
