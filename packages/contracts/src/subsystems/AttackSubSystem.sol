@@ -2,13 +2,7 @@
 pragma solidity >=0.8.0;
 
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {getKeysWithValue} from
-  "@latticexyz/world/src/modules/keyswithvalue/getKeysWithValue.sol";
-import {
-  Position,
-  PositionData,
-  PositionTableId
-} from "../codegen/tables/Position.sol";
+import {Position} from "../codegen/tables/Position.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
 import {Predation} from "../codegen/tables/Predation.sol";
 import {Id} from "../codegen/tables/Id.sol";
