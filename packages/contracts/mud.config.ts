@@ -48,18 +48,18 @@ export default mudConfig({
         cooldown: "uint32",
       },
     },
+    AttackStat: {
+      schema: {
+        maxDistance: "uint32",
+        cooldown: "uint32",
+      },
+    },
     HookHandler: {
       keySchema: {
         entityType: "bytes32",
         hookType: "bytes32",
       },
       schema: "address",
-    },
-    AttackStat: {
-      schema: {
-        maxDistance: "uint32",
-        cooldown: "uint32",
-      },
     },
     Mutation: {
       schema: {
