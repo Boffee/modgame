@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {DirectionalReaction, DirectionType} from "./DirectionalReaction.sol";
-import {OrientationType} from "../codegen/Types.sol";
+import {BaseReaction} from "./BaseReaction.sol";
+import {OrientationType, DirectionType} from "../codegen/Types.sol";
 
-abstract contract MoveBase is DirectionalReaction {
+abstract contract MoveBase is BaseReaction {
   function _move(bytes32 entity, DirectionType direction, int128 distance)
     internal
   {
