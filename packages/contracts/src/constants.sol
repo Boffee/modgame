@@ -17,4 +17,6 @@ bytes32 constant ON_ATTACK = bytes32("ON_ATTACK");
 bytes32 constant ON_HIT = bytes32("ON_HIT");
 bytes32 constant ON_KILL = bytes32("ON_KILL");
 
-bytes32 constant DUMMY = bytes32("DUMMY");
+bytes32 constant RED = bytes32("RED");
+bytes32 constant GREEN = bytes32("GREEN");
+bytes32 constant BLUE = bytes32("BLUE");

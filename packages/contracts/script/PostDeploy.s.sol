@@ -32,8 +32,16 @@ contract PostDeploy is Script {
     // IWorld(worldAddress).grantAccess("", "MoveSub", address(system));
     // IWorld(worldAddress).grantAccess("", "AttributesSub", address(system));
 
-    MoveStat.set(world, DUMMY, MoveStatData({maxDistance: 1, cooldown: 1}));
-    AttackStat.set(world, DUMMY, AttackStatData({maxDistance: 1, cooldown: 1}));
+    MoveStat.set(world, RED, MoveStatData({maxDistance: 1, cooldown: 1}));
+    AttackStat.set(world, RED, AttackStatData({maxDistance: 1, cooldown: 1}));
+    MoveStat.set(world, GREEN, MoveStatData({maxDistance: 1, cooldown: 1}));
+    AttackStat.set(world, GREEN, AttackStatData({maxDistance: 1, cooldown: 1}));
+    MoveStat.set(world, BLUE, MoveStatData({maxDistance: 1, cooldown: 1}));
+    AttackStat.set(world, BLUE, AttackStatData({maxDistance: 1, cooldown: 1}));
+
+    Predation.set(world, RED, GREEN, true);
+    Predation.set(world, GREEN, BLUE, true);
+    Predation.set(world, BLUE, RED, true);
 
     // deploy and register hook handlers
     // move
