@@ -41,4 +41,19 @@ contract ItemSystem is AuthedSystem {
     require(PositionLib.withinDistance(from, to, 1), "too far away");
     ERC721Logic._transfer(entity, from, to);
   }
+
+  function trigger(bytes32 source, bytes32 target, OrientationType orientation)
+    public
+    onlyApproved(source)
+  {
+    require(PositionLib.withinDistance(source, target, 1), "too far away");
+    require(Owner.get(target) == NULL, "already owned");
+    Orientation.set(target, orientation);
+    IWorld(_world())._trigger(source, target);
+  }
+
+  function trigger(bytes32 source, bytes32 target) public onlyApproved(source) {
+    require(PositionLib.withinDistance(source, target, 1), "too far away");
+    IWorld(_world())._trigger(source, target);
+  }
 }

@@ -17,7 +17,6 @@ import { IItemSystem } from "./IItemSystem.sol";
 import { IModSystem } from "./IModSystem.sol";
 import { IMoveSystem } from "./IMoveSystem.sol";
 import { IPlayerSpawnSystem } from "./IPlayerSpawnSystem.sol";
-import { ITriggerSystem } from "./ITriggerSystem.sol";
 
 /**
  * The IWorld interface includes all systems dynamically added to the World
@@ -36,8 +35,7 @@ interface IWorld is
   IItemSystem,
   IModSystem,
   IMoveSystem,
-  IPlayerSpawnSystem,
-  ITriggerSystem
+  IPlayerSpawnSystem
 {
 
 }

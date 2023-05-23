@@ -11,4 +11,8 @@ interface IItemSystem {
   function drop(bytes32 entity, bytes32 owner, int128 x, int128 y, OrientationType orientation) external;
 
   function transfer(bytes32 entity, bytes32 from, bytes32 to) external;
+
+  function trigger(bytes32 source, bytes32 target, OrientationType orientation) external;
+
+  function trigger(bytes32 source, bytes32 target) external;
 }
