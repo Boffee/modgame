@@ -3,9 +3,24 @@ pragma solidity >=0.8.0;
 
 import {SignedMath} from "@openzeppelin/contracts/utils/math/SignedMath.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
+import {getKeysWithValue} from
+  "@latticexyz/world/src/modules/keyswithvalue/getKeysWithValue.sol";
+import {
+  Position,
+  PositionData,
+  PositionTableId
+} from "../codegen/tables/Position.sol";
 
 library PositionLib {
   using PositionExtension for PositionData;
+
+  function getEntitiesAtPosition(int128 x, int128 y)
+    internal
+    view
+    returns (bytes32[] memory)
+  {
+    return getKeysWithValue(PositionTableId, Position.encode(x, y));
+  }
 
   /**
    * @dev Checks if two positions are collocated
