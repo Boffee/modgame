@@ -3,14 +3,13 @@ pragma solidity >=0.8.0;
 
 import {getUniqueEntity} from
   "@latticexyz/world/src/modules/uniqueentity/getUniqueEntity.sol";
+import {System} from "@latticexyz/world/src/System.sol";
 import {AttackStat, AttackStatData} from "../codegen/tables/AttackStat.sol";
 import {MoveStat, MoveStatData} from "../codegen/tables/MoveStat.sol";
 import {Owner} from "../codegen/tables/Owner.sol";
-import {Immutable} from "../codegen/tables/Immutable.sol";
-import {AuthedSystem} from "../extensions/AuthedSystem.sol";
 import {TypeCast} from "../libraries/TypeCast.sol";
 
-contract AttributesSubSystem is AuthedSystem {
+contract AttributesSubSystem is System {
   using TypeCast for address;
 
   /**
@@ -35,6 +34,16 @@ contract AttributesSubSystem is AuthedSystem {
   }
 
   /**
+   * @notice Create a new type with no attributes
+   * @param owner the owner of the type
+   * @param type_ the type entity
+   */
+  function _createType(address owner, bytes32 type_) public {
+    require(Owner.get(type_) == bytes32(0), "Type already defined");
+    Owner.set(type_, owner.toBytes32());
+  }
+
+  /**
    * @notice Define a type
    * @dev type cannot be redefined
    * @param type_ the type entity
@@ -49,22 +58,10 @@ contract AttributesSubSystem is AuthedSystem {
     uint32 attackCD,
     uint32 moveDist,
     uint32 moveCD
-  ) public onlyApproved(type_) {
-    require(!Immutable.get(type_), "Type is immutable");
-
+  ) internal {
     AttackStat.set(
       type_, AttackStatData({maxDistance: attackDist, cooldown: attackCD})
     );
     MoveStat.set(type_, MoveStatData({maxDistance: moveDist, cooldown: moveCD}));
-  }
-
-  /**
-   * @notice Create a new type with no attributes
-   * @param owner the owner of the type
-   * @param type_ the type entity
-   */
-  function _createType(address owner, bytes32 type_) public {
-    require(Owner.get(type_) == bytes32(0), "Type already defined");
-    Owner.set(type_, owner.toBytes32());
   }
 }
