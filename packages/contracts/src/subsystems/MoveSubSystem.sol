@@ -20,7 +20,11 @@ import {EntityHookSystem} from "../extensions/EntityHookSystem.sol";
 contract MoveSubSystem is EntityHookSystem {
   using TypeLib for bytes32;
 
-  function _move(bytes32 entity, int128 x, int128 y) external {
+  function _moveRelative(bytes32 entity, int128 xDist, int128 yDist) public {
+    _move(entity, Position.getX(entity) + xDist, Position.getY(entity) + yDist);
+  }
+
+  function _move(bytes32 entity, int128 x, int128 y) public {
     _callHooks(
       ON_LEAVE,
       entity,
