@@ -1,8 +1,9 @@
-import ReactDOM from "react-dom/client";
 import { mount as mountDevTools } from "@latticexyz/dev-tools";
+import ReactDOM from "react-dom/client";
 import { App } from "./App";
-import { setup } from "./mud/setup";
 import { MUDProvider } from "./MUDContext";
+import "./index.css";
+import { setup } from "./mud/setup";
 
 const rootElement = document.getElementById("react-root");
 if (!rootElement) throw new Error("React root not found");
