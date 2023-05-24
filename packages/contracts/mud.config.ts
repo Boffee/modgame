@@ -1,4 +1,4 @@
-import { mudConfig, resolveTableId } from "@latticexyz/world/register";
+import { mudConfig } from "@latticexyz/world/register";
 
 export default mudConfig({
   systems: {
@@ -84,6 +84,13 @@ export default mudConfig({
         y: "int128",
       },
     },
+    AtPosition: {
+      keySchema: {
+        x: "int128",
+        y: "int128",
+      },
+      schema: "bytes32[]",
+    },
     Balance: {
       keySchema: {
         token: "bytes32",
@@ -113,11 +120,6 @@ export default mudConfig({
     DirectionType: ["Forward", "Right", "Backward", "Left"],
   },
   modules: [
-    {
-      name: "KeysWithValueModule",
-      root: true,
-      args: [resolveTableId("Position")],
-    },
     {
       name: "UniqueEntityModule",
       root: true,

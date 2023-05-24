@@ -3,11 +3,11 @@ pragma solidity >=0.8.0;
 
 import {System} from "@latticexyz/world/src/System.sol";
 import {Orientation} from "../codegen/tables/Orientation.sol";
+import {AtPosition} from "../codegen/tables/AtPosition.sol";
 import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {OrientationType, DirectionType} from "../codegen/Types.sol";
 import {IWorldPhysics} from "../interfaces/IWorldPhysics.sol";
 import {IHookHandler} from "../interfaces/IHookHandler.sol";
-import {PositionLib} from "../libraries/PositionLib.sol";
 
 abstract contract BaseReaction is IHookHandler, System {
   function _physics() internal view returns (IWorldPhysics) {
@@ -28,7 +28,7 @@ abstract contract BaseReaction is IHookHandler, System {
     view
     returns (bytes32[] memory)
   {
-    return PositionLib.getEntitiesAtPosition(x, y);
+    return AtPosition.get(x, y);
   }
 
   function _getOrientation(bytes32 entity)

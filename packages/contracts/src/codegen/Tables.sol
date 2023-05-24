@@ -20,6 +20,7 @@ import { HookHandler, HookHandlerTableId } from "./tables/HookHandler.sol";
 import { Mutation, MutationData, MutationTableId } from "./tables/Mutation.sol";
 import { Predation, PredationTableId } from "./tables/Predation.sol";
 import { Position, PositionData, PositionTableId } from "./tables/Position.sol";
+import { AtPosition, AtPositionTableId } from "./tables/AtPosition.sol";
 import { Balance, BalanceTableId } from "./tables/Balance.sol";
 import { TotalSupply, TotalSupplyTableId } from "./tables/TotalSupply.sol";
 import { Owner, OwnerTableId } from "./tables/Owner.sol";

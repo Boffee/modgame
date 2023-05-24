@@ -13,6 +13,7 @@ import "../src/reactions/TriggerReaction.sol";
 import "../src/reactions/KillReaction.sol";
 import "../src/reactions/AttackReaction.sol";
 import "../src/libraries/ItemSpawnLogic.sol";
+import "../src/storeHooks/PositionIndexer.sol";
 
 contract PostDeploy is Script {
   function run(address worldAddress) external {
@@ -23,6 +24,10 @@ contract PostDeploy is Script {
     vm.startBroadcast(deployerPrivateKey);
 
     IWorld world = IWorld(worldAddress);
+
+    PositionIndexer indexer = new PositionIndexer();
+    world.grantAccess("", "AtPosition", address(indexer));
+    world.registerStoreHook(PositionTableId, indexer);
 
     // HookHandlerProxySubSystem system = new HookHandlerProxySubSystem();
     // world.registerSystem("hook", "HandlerProxy", system, false);

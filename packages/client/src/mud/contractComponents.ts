@@ -264,6 +264,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    AtPosition: (() => {
+      const tableId = new TableId("", "AtPosition");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.StringArray,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Balance: (() => {
       const tableId = new TableId("", "Balance");
       return defineComponent(

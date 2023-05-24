@@ -2,14 +2,8 @@
 pragma solidity >=0.8.0;
 
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {getKeysWithValue} from
-  "@latticexyz/world/src/modules/keyswithvalue/getKeysWithValue.sol";
-
-import {
-  Position,
-  PositionData,
-  PositionTableId
-} from "../codegen/tables/Position.sol";
+import {AtPosition} from "../codegen/tables/AtPosition.sol";
+import {Position, PositionData} from "../codegen/tables/Position.sol";
 import {Orientation} from "../codegen/tables/Orientation.sol";
 import {OrientationType, DirectionType} from "../codegen/Types.sol";
 import {TypeLib} from "../libraries/TypeLib.sol";
@@ -37,17 +31,12 @@ contract MoveSubSystem is EntityHookSystem {
     _callHooks(
       ON_LEAVE,
       entity,
-      getKeysWithValue(
-        PositionTableId,
-        Position.encode(Position.getX(entity), Position.getY(entity))
-      )
+      AtPosition.get(Position.getX(entity), Position.getY(entity))
     );
 
     Position.set(entity, x, y);
 
-    _callHooks(
-      ON_ENTER, entity, getKeysWithValue(PositionTableId, Position.encode(x, y))
-    );
+    _callHooks(ON_ENTER, entity, AtPosition.get(x, y));
     _callHook(ON_MOVE_END, entity, NULL);
   }
 
@@ -68,10 +57,8 @@ contract MoveSubSystem is EntityHookSystem {
 
     uint256 length = 0xff & (directions >> 248);
 
-    bytes32[] memory targetEntities =
-      getKeysWithValue(PositionTableId, Position.encode(x, y));
     for (uint256 i = 0; i < length; i++) {
-      _callHooks(ON_LEAVE, entity, targetEntities);
+      _callHooks(ON_LEAVE, entity, AtPosition.get(x, y));
 
       uint256 direction = 3 & (directions >> (i * 2));
       if (direction == 0) {
@@ -88,8 +75,7 @@ contract MoveSubSystem is EntityHookSystem {
         x -= 1;
       }
 
-      targetEntities = getKeysWithValue(PositionTableId, Position.encode(x, y));
-      _callHooks(ON_ENTER, entity, targetEntities);
+      _callHooks(ON_ENTER, entity, AtPosition.get(x, y));
     }
 
     Position.set(entity, x, y);

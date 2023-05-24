@@ -64,6 +64,8 @@ export function createSystemCalls({
     await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
   };
 
+  const drop = async (entity: BytesLike, item: BytesLike) => {};
+
   return {
     attack,
     move,
