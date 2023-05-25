@@ -1,5 +1,6 @@
 import { BigNumber, BigNumberish, ethers } from "ethers";
 import { GOLD_TOKEN, ITEM_TOKEN } from "../constants";
+import { unixTime } from "./time";
 
 export function getItemIndex(seed: BigNumberish, itemCount: number) {
   return BigNumber.from(random(seed))
@@ -30,15 +31,11 @@ export function random(seed: BigNumberish): string {
   );
 }
 
-function now() {
-  return Math.floor(Date.now() / 1000);
-}
-
 const cache: Record<string, BigNumberish[]> = {};
 
 export const SPAWN_AMOUNT = 10000;
 
-const startTime = now() - SPAWN_AMOUNT * 2;
+const startTime = unixTime() - SPAWN_AMOUNT * 2;
 
 setTimeout(() => {
   for (let i = 0; i < SPAWN_AMOUNT * 2; i++) {
@@ -47,7 +44,7 @@ setTimeout(() => {
 }, 1);
 
 setInterval(() => {
-  const time = now();
+  const time = unixTime();
   getPosition(time);
 }, 1000);
 
@@ -61,12 +58,12 @@ function getSeedsAtPosition(x: number, y: number, start: number, end: number) {
 }
 
 export function getItemSeedsAtPosition(x: number, y: number) {
-  const time = now();
+  const time = unixTime();
   return getSeedsAtPosition(x, y, time - SPAWN_AMOUNT, time);
 }
 
 export function getGoldSeedsAtPosition(x: number, y: number) {
-  const time = now();
+  const time = unixTime();
   return getSeedsAtPosition(x, y, time - SPAWN_AMOUNT * 2, time - SPAWN_AMOUNT);
 }
 

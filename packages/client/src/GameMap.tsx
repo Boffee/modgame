@@ -13,14 +13,14 @@ export default function GameMap({
   rows,
   cols,
 }: GameMapProps) {
-  const xRange = _.range(
-    Math.round(centerX - rows / 2),
-    Math.round(centerX + rows / 2)
-  );
-  const yRange = _.range(
-    Math.round(centerY - cols / 2),
-    Math.round(centerY + cols / 2)
-  );
+  const xStart = Math.round(centerX - rows / 2);
+  const yStart = Math.round(centerY - cols / 2);
+  const xEnd = Math.round(centerX + rows / 2);
+  const yEnd = Math.round(centerY + cols / 2);
+
+  const yRange = _.range(yStart, yEnd);
+  const xRange = _.range(xStart, xEnd);
+
   return (
     <div>
       {yRange.map((y) => (
