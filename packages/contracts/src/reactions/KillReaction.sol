@@ -12,11 +12,11 @@ abstract contract KillBase is BaseReaction {
     (int128 x, int128 y) = _getPosition(entity);
     bytes32[] memory entities;
     if (orientation == OrientationType.North) {
-      entities = _getEntitiesAtPosition(x, y + distance);
+      entities = _getEntitiesAtPosition(x, y - distance);
     } else if (orientation == OrientationType.East) {
       entities = _getEntitiesAtPosition(x + distance, y);
     } else if (orientation == OrientationType.South) {
-      entities = _getEntitiesAtPosition(x, y - distance);
+      entities = _getEntitiesAtPosition(x, y + distance);
     } else if (orientation == OrientationType.West) {
       entities = _getEntitiesAtPosition(x - distance, y);
     }

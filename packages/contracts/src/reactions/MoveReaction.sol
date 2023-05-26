@@ -10,11 +10,11 @@ abstract contract MoveBase is BaseReaction {
   {
     OrientationType orientation = _getNetOrientation(entity, direction);
     if (orientation == OrientationType.North) {
-      _physics()._moveRelative(entity, 0, distance);
+      _physics()._moveRelative(entity, 0, -distance);
     } else if (orientation == OrientationType.East) {
       _physics()._moveRelative(entity, distance, 0);
     } else if (orientation == OrientationType.South) {
-      _physics()._moveRelative(entity, 0, -distance);
+      _physics()._moveRelative(entity, 0, distance);
     } else if (orientation == OrientationType.West) {
       _physics()._moveRelative(entity, -distance, 0);
     }

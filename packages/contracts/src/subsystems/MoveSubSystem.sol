@@ -63,13 +63,13 @@ contract MoveSubSystem is EntityHookSystem {
       uint256 direction = 3 & (directions >> (i * 2));
       if (direction == 0) {
         // up
-        y += 1;
+        y -= 1;
       } else if (direction == 1) {
         // right
         x += 1;
       } else if (direction == 2) {
         // down
-        y -= 1;
+        y += 1;
       } else if (direction == 3) {
         // left
         x -= 1;
