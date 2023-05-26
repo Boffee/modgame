@@ -22,17 +22,17 @@ export default function GameMap({
   const xRange = _.range(xStart, xEnd);
 
   return (
-    <div>
+    <div
+      style={{
+        position: "relative",
+        backgroundSize: "2rem 2rem",
+        backgroundImage:
+          "radial-gradient(circle, rgba(256,256,256,0.375) 0.1rem, rgba(0, 0, 0, 0) 0.1rem)",
+      }}
+    >
       {yRange.map((y) => (
         // horizontal rows
-        <div
-          key={y}
-          style={{
-            backgroundColor: "#111",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
+        <div key={y} className="flex flex-row">
           {xRange.map((x) => (
             <Tile key={x} x={x} y={y} />
           ))}
