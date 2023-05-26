@@ -16,10 +16,10 @@ export function getPosition(seed: BigNumberish) {
     .sub(500)
     .toNumber();
   const key = `${x},${y}`;
-  if (cache[key]) {
-    cache[key].push(seed);
+  if (positionToSeed[key]) {
+    positionToSeed[key].push(seed);
   } else {
-    cache[key] = [seed];
+    positionToSeed[key] = [seed];
   }
   return { x, y };
 }
@@ -31,16 +31,18 @@ export function random(seed: BigNumberish): string {
   );
 }
 
-const cache: Record<string, BigNumberish[]> = {};
+const positionToSeed: Record<string, BigNumberish[]> = {};
 
 export const SPAWN_AMOUNT = 10000;
 
 const startTime = unixTime() - SPAWN_AMOUNT * 2;
 
 setTimeout(() => {
+  console.log("start spawn");
   for (let i = 0; i < SPAWN_AMOUNT * 2; i++) {
     getPosition(startTime + i);
   }
+  console.log("done spawn");
 }, 1);
 
 setInterval(() => {
@@ -51,7 +53,7 @@ setInterval(() => {
 function getSeedsAtPosition(x: number, y: number, start: number, end: number) {
   const key = `${x},${y}`;
   return (
-    cache[key]?.filter(
+    positionToSeed[key]?.filter(
       (seed) => BigNumber.from(seed).gte(start) && BigNumber.from(seed).lte(end)
     ) || []
   );
