@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { useState } from "react";
 import Tile from "./Tile";
 
 export type GameMapProps = {
@@ -13,6 +14,8 @@ export default function GameMap({
   rows,
   cols,
 }: GameMapProps) {
+  const [hoverTile, setHoverTile] = useState<{ x: number; y: number } | null>();
+
   const xStart = Math.round(centerX - rows / 2);
   const yStart = Math.round(centerY - cols / 2);
   const xEnd = Math.round(centerX + rows / 2);
@@ -34,7 +37,23 @@ export default function GameMap({
         // horizontal rows
         <div key={y} className="flex flex-row">
           {xRange.map((x) => (
-            <Tile key={x} x={x} y={y} />
+            <Tile
+              key={x}
+              x={x}
+              y={y}
+              onMouseOver={() => {
+                setHoverTile({ x, y });
+              }}
+              onMouseOut={() => {
+                setHoverTile(null);
+              }}
+              style={{
+                border:
+                  hoverTile?.x === x && hoverTile?.y === y
+                    ? "1px solid red"
+                    : "",
+              }}
+            />
           ))}
         </div>
       ))}

@@ -1,4 +1,5 @@
 import { HasValue, runQuery } from "@latticexyz/recs";
+import { HTMLAttributes } from "react";
 import EntityLayer from "./EntityLayer";
 import GoldSpawnLayer from "./GoldSpawnLayer";
 import ItemSpawnLayer from "./ItemSpawnLayer";
@@ -11,9 +12,9 @@ import {
 export type TileProps = {
   x: number;
   y: number;
-};
+} & HTMLAttributes<HTMLDivElement>;
 
-export default function Tile({ x, y }: TileProps) {
+export default function Tile({ x, y, ...passProps }: TileProps) {
   const {
     components: { Position },
   } = useMUD();
@@ -26,7 +27,10 @@ export default function Tile({ x, y }: TileProps) {
   ]);
 
   return (
-    <div className="w-8 h-8 text-2xl flex items-center justify-center">
+    <div
+      className="w-8 h-8 text-2xl flex items-center justify-center"
+      {...passProps}
+    >
       {Array.from(matchingEntities).map((entity) => (
         <EntityLayer key={entity} entity={entity} />
       ))}
