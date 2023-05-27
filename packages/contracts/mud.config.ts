@@ -30,14 +30,40 @@ export default mudConfig({
     "MutableSystem",
     "EntityHookSystem",
   ],
+  // TODO: optimize for gas
   tables: {
-    // TODO: optimize for gas
+    /* Game Engine Tables */
+    Owner: "bytes32",
+    Type: "bytes32",
+    HookHandlerRegistry: "address",
+    HookHandler: {
+      keySchema: {
+        entityType: "bytes32",
+        hookType: "bytes32",
+      },
+      schema: "address",
+    },
+    Mutation: {
+      schema: {
+        entityType: "bytes32",
+        endsAt: "uint40",
+      },
+    },
+    /* Token Tables */
     Token: "bytes32",
     Id: "uint256",
-    Type: "bytes32",
     Name: "string",
     Description: "string",
     ImageUri: "string",
+    Balance: {
+      keySchema: {
+        token: "bytes32",
+        owner: "bytes32",
+      },
+      schema: "uint256",
+    },
+    TotalSupply: "uint256",
+    /* Game Tables */
     Immutable: "bool",
     Collected: "bool",
     ModList: {
@@ -55,20 +81,6 @@ export default mudConfig({
       schema: {
         maxDistance: "uint32",
         cooldown: "uint32",
-      },
-    },
-    HookHandlerRegistry: "address",
-    HookHandler: {
-      keySchema: {
-        entityType: "bytes32",
-        hookType: "bytes32",
-      },
-      schema: "address",
-    },
-    Mutation: {
-      schema: {
-        entityType: "bytes32",
-        endsAt: "uint40",
       },
     },
     Predation: {
@@ -90,21 +102,6 @@ export default mudConfig({
         y: "int128",
       },
       schema: "bytes32[]",
-    },
-    Balance: {
-      keySchema: {
-        token: "bytes32",
-        owner: "bytes32",
-      },
-      schema: "uint256",
-    },
-    TotalSupply: "uint256",
-    Owner: "bytes32",
-    Metdata: {
-      schema: {
-        createdAt: "uint40",
-        updatedAt: "uint40",
-      },
     },
     Cooldown: {
       schema: {

@@ -5,6 +5,82 @@ import { defineComponent, Type as RecsType, World } from "@latticexyz/recs";
 
 export function defineContractComponents(world: World) {
   return {
+    Owner: (() => {
+      const tableId = new TableId("", "Owner");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Type: (() => {
+      const tableId = new TableId("", "Type");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    HookHandlerRegistry: (() => {
+      const tableId = new TableId("", "HookHandlerRegis");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    HookHandler: (() => {
+      const tableId = new TableId("", "HookHandler");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Mutation: (() => {
+      const tableId = new TableId("", "Mutation");
+      return defineComponent(
+        world,
+        {
+          entityType: RecsType.String,
+          endsAt: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Token: (() => {
       const tableId = new TableId("", "Token");
       return defineComponent(
@@ -26,21 +102,6 @@ export function defineContractComponents(world: World) {
         world,
         {
           value: RecsType.BigInt,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Type: (() => {
-      const tableId = new TableId("", "Type");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.String,
         },
         {
           metadata: {
@@ -86,6 +147,36 @@ export function defineContractComponents(world: World) {
         world,
         {
           value: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    Balance: (() => {
+      const tableId = new TableId("", "Balance");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.BigInt,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    TotalSupply: (() => {
+      const tableId = new TableId("", "TotalSupply");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.BigInt,
         },
         {
           metadata: {
@@ -187,52 +278,6 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
-    HookHandlerRegistry: (() => {
-      const tableId = new TableId("", "HookHandlerRegis");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.String,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    HookHandler: (() => {
-      const tableId = new TableId("", "HookHandler");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.String,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Mutation: (() => {
-      const tableId = new TableId("", "Mutation");
-      return defineComponent(
-        world,
-        {
-          entityType: RecsType.String,
-          endsAt: RecsType.Number,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
     Predation: (() => {
       const tableId = new TableId("", "Predation");
       return defineComponent(
@@ -270,67 +315,6 @@ export function defineContractComponents(world: World) {
         world,
         {
           value: RecsType.StringArray,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Balance: (() => {
-      const tableId = new TableId("", "Balance");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.BigInt,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    TotalSupply: (() => {
-      const tableId = new TableId("", "TotalSupply");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.BigInt,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Owner: (() => {
-      const tableId = new TableId("", "Owner");
-      return defineComponent(
-        world,
-        {
-          value: RecsType.String,
-        },
-        {
-          metadata: {
-            contractId: tableId.toHexString(),
-            tableId: tableId.toString(),
-          },
-        }
-      );
-    })(),
-    Metdata: (() => {
-      const tableId = new TableId("", "Metdata");
-      return defineComponent(
-        world,
-        {
-          createdAt: RecsType.Number,
-          updatedAt: RecsType.Number,
         },
         {
           metadata: {
